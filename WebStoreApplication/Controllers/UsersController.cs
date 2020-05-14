@@ -6,13 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebStoreApplication.Controllers
 {
+    [ApiController]
     public class UsersController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         /// <summary>
         /// Adds user to the DB
         /// </summary>
