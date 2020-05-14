@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Data\Products.json" />
+    <Content Remove="Data\Users.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Data\Products.json" />
+    <None Include="Data\Users.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
   </ItemGroup>
