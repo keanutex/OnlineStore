@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 namespace WebStoreApplication
 {
@@ -28,9 +30,13 @@ namespace WebStoreApplication
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Online Store API", Version = "v1" , Description = "ASP.NET Core API for an online store.", });
 
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+            
 
         }
 

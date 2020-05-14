@@ -23,17 +23,7 @@ namespace WebStoreApplication.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Prints id in console
-        /// </summary>
-        /// <param name="id"></param>        
-        [HttpPost("{id}")]
-        public IActionResult Print(long id)
-        {
-            Console.Write(id);
-            return NoContent();
-        }
-
+       
         public IActionResult Privacy()
         {
             return View();
