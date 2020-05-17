@@ -27,6 +27,12 @@ namespace WebStoreApplication.Controllers
             return Ok(new { results = productAccessor.getProduct(id)});
         }
 
+        [HttpGet("all/")]
+        public IActionResult getAllProducts()
+        {
+            return Ok(new { results = productAccessor.getAllProducts()});
+        }
+
         [HttpDelete("")]
         public IActionResult removeProduct(int id)
         {

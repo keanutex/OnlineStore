@@ -10,6 +10,7 @@ using System.Reflection;
 using System.IO;
 using WebStoreApplication.Models;
 using System.Text.Json;
+using System.Collections.Generic;
 
 namespace WebStoreApplication
 {
@@ -31,6 +32,7 @@ namespace WebStoreApplication
         public void removeProduct(int productID);
         public ProductModel getProduct(int productID);
         public void updateProduct(ProductModel product); 
+        public List<ProductModel> getAllProducts();
     }
     public class ProductAccessor: IProductAccessor
     {
@@ -46,7 +48,12 @@ namespace WebStoreApplication
         public ProductModel getProduct(int productID)
         {
             return ProductsContext.aggregate.products.Where(pr => pr.productID == productID).SingleOrDefault();
-        } 
+        }
+
+        public List<ProductModel> getAllProducts()
+        {
+            return ProductsContext.aggregate.products;
+        }  
 
         public void updateProduct(ProductModel product)
         {
