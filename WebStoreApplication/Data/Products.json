@@ -1,1 +1,12 @@
-﻿{}
+﻿{
+  "products": 
+  [ 
+       {
+       "productID": 0,
+       "productName": "default",
+       "productDescription": "default",
+       "price": 0.0,
+       "userID": 0
+       }
+  ]
+}
