@@ -1,12 +1,82 @@
 ﻿{
-  "products": 
-  [ 
-       {
-       "productID": 0,
-       "productName": "default",
-       "productDescription": "default",
-       "price": 0.0,
-       "userID": 0
-       }
+  "products": [
+    {
+      "productID": 0,
+      "productName": "default",
+      "productDescription": "default",
+      "price": 0.0,
+      "userID": 0
+    },
+    {
+      "productID": 1,
+      "productName": "Soap",
+      "productDescription": "Cleans everything",
+      "price": 2.0,
+      "userID": 3
+    },
+    {
+      "productID": 2,
+      "productName": "Masks",
+      "productDescription": "Blocks everything",
+      "price": 1000.0,
+      "userID": 0
+    },
+    {
+      "productID": 3,
+      "productName": "Other",
+      "productDescription": "defaasdasult",
+      "price": 123.0,
+      "userID": 0
+    },
+    {
+      "productID": 4,
+      "productName": "defaewqqweult",
+      "productDescription": "defaqweult",
+      "price": 0.0,
+      "userID": 0
+    },
+    {
+      "productID": 5,
+      "productName": "defaqweqult",
+      "productDescription": "deqwefault",
+      "price": 0.0,
+      "userID": 0
+    },
+    {
+      "productID": 6,
+      "productName": "default",
+      "productDescription": "default",
+      "price": 0.0,
+      "userID": 0
+    },
+    {
+      "productID": 7,
+      "productName": "defauqwelt",
+      "productDescription": "deqwefault",
+      "price": 0.0,
+      "userID": 0
+    },
+    {
+      "productID": 8,
+      "productName": "default",
+      "productDescription": "default",
+      "price": 0.0,
+      "userID": 0
+    },
+    {
+      "productID": 9,
+      "productName": "default",
+      "productDescription": "default",
+      "price": 0.0,
+      "userID": 0
+    },
+    {
+      "productID": 10,
+      "productName": "default",
+      "productDescription": "default",
+      "price": 0.0,
+      "userID": 0
+    }
+
   ]
 }

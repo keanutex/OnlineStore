@@ -24,13 +24,13 @@ namespace WebStoreApplication.Controllers
         [HttpGet("{id}")]
         public IActionResult GetProduct(int id)
         {
-            return Ok(new { results = productAccessor.GetProduct(id)});
+            return Ok(productAccessor.GetProduct(id));
         }
 
         [HttpGet("all/")]
         public IActionResult GetAllProducts()
         {
-            return Ok(new { results = productAccessor.GetAllProducts()});
+            return Ok(productAccessor.GetAllProducts());
         }
 
         [HttpDelete("{id}")]
