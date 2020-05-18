@@ -1,0 +1,63 @@
+﻿@using System.IO;
+@using System.Net;
+@using Newtonsoft.Json;
+@using Newtonsoft.Json.Linq;
+
+@{
+    ViewData["Title"] = "Products";
+
+    String result = Get("http://localhost:5000/products/all");
+
+
+    List<ProductModel> products = JsonConvert.DeserializeObject<List<ProductModel>>(result);
+}
+
+@functions {
+    public string Get(string uri)
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+        request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        using (Stream stream = response.GetResponseStream())
+        using (StreamReader reader = new StreamReader(stream))
+        {
+            return reader.ReadToEnd();
+        }
+    }
+}
+
+<h1>Products</h1>
+
+<table class="table" id="productsTable">
+    <thead>
+        <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (ProductModel product in products)
+            {
+                <tr>
+                    <td>@product.productName</td>
+                    <td>@product.productDescription</td>
+                    <td>@product.price</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#productsTable').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+}
+
+
