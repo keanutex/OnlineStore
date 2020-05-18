@@ -14,6 +14,20 @@
   <ItemGroup>
     <None Include="Data\Products.json" />
     <None Include="Data\Users.json" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\dataTables.bootstrap.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\dataTables.bootstrap.min.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\dataTables.bootstrap4.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\dataTables.bootstrap4.min.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\dataTables.foundation.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\dataTables.foundation.min.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\dataTables.jqueryui.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\dataTables.jqueryui.min.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\dataTables.semanticui.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\dataTables.semanticui.min.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\jquery.dataTables.js" />
+    <None Include="wwwroot\DataTables\DataTables-1.10.21\js\jquery.dataTables.min.js" />
+    <None Include="wwwroot\DataTables\datatables.js" />
+    <None Include="wwwroot\DataTables\datatables.min.js" />
   </ItemGroup>
 
   <ItemGroup>
