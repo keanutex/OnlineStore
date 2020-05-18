@@ -15,35 +15,35 @@ namespace WebStoreApplication.Controllers
         }
 
         [HttpPost("")]
-        public IActionResult addProduct(ProductModel product)
+        public IActionResult AddProduct(ProductModel product)
         {
-            productAccessor.addProduct(product);
+            productAccessor.AddProduct(product);
             return Ok();
         }
 
-        [HttpGet("")]
-        public IActionResult getProduct(int id)
+        [HttpGet("{id}")]
+        public IActionResult GetProduct(int id)
         {
-            return Ok(new { results = productAccessor.getProduct(id)});
+            return Ok(new { results = productAccessor.GetProduct(id)});
         }
 
         [HttpGet("all/")]
-        public IActionResult getAllProducts()
+        public IActionResult GetAllProducts()
         {
-            return Ok(new { results = productAccessor.getAllProducts()});
+            return Ok(new { results = productAccessor.GetAllProducts()});
         }
 
-        [HttpDelete("")]
-        public IActionResult removeProduct(int id)
+        [HttpDelete("{id}")]
+        public IActionResult RemoveProduct(int id)
         {
-            productAccessor.removeProduct(id);
+            productAccessor.RemoveProduct(id);
             return Ok();
         }
 
         [HttpPut("")]
-        public IActionResult updateProduct(ProductModel product)
+        public IActionResult UpdateProduct(ProductModel product)
         {
-            productAccessor.updateProduct(product);
+            productAccessor.UpdateProduct(product);
             return Ok();
         }
 

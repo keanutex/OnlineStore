@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,62 +8,9 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
 using WebStoreApplication.Models;
-using System.Text.Json;
-using System.Collections.Generic;
 
 namespace WebStoreApplication
 {
-    public static class ProductsContext
-    {
-        public static ProductsAggregate aggregate;
-        public static int nextProductID = 1;
-
-        static ProductsContext()
-        {
-            string jsonString  = File.ReadAllText("Data\\Products.json");
-            aggregate = JsonSerializer.Deserialize<ProductsAggregate>(jsonString);
-        }
-    }
-
-    public interface IProductAccessor
-    {
-        public void addProduct(ProductModel product);
-        public void removeProduct(int productID);
-        public ProductModel getProduct(int productID);
-        public void updateProduct(ProductModel product); 
-        public List<ProductModel> getAllProducts();
-    }
-    public class ProductAccessor: IProductAccessor
-    {
-        public void addProduct(ProductModel product)
-        {
-            product.productID = ProductsContext.nextProductID++;
-            ProductsContext.aggregate.products.Add(product);
-        }
-        public void removeProduct(int productID)
-        {
-            ProductsContext.aggregate.products.RemoveAll(pr => pr.productID == productID);
-        }
-        public ProductModel getProduct(int productID)
-        {
-            return ProductsContext.aggregate.products.Where(pr => pr.productID == productID).SingleOrDefault();
-        }
-
-        public List<ProductModel> getAllProducts()
-        {
-            return ProductsContext.aggregate.products;
-        }  
-
-        public void updateProduct(ProductModel product)
-        {
-            int index = ProductsContext.aggregate.products.FindIndex(pr => pr.productID == product.productID);
-            ProductsContext.aggregate.products[index].productName = product.productName;
-            ProductsContext.aggregate.products[index].productDescription = product.productDescription;
-            ProductsContext.aggregate.products[index].price = product.price;
-            ProductsContext.aggregate.products[index].userID = product.userID;        
-        } 
-    }
-
     public class Startup
     {
         public Startup(IConfiguration configuration)
