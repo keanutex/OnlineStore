@@ -36,6 +36,7 @@
             <th scope="col">Product Name</th>
             <th scope="col">Description</th>
             <th scope="col">Price</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -46,6 +47,7 @@
                     <td>@product.productName</td>
                     <td>@product.productDescription</td>
                     <td>@product.price</td>
+                    <td><a href="urlForProduct">View</a></td>
                 </tr>
             }
         }
@@ -55,7 +57,13 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-            $('#productsTable').DataTable();
+            $('#productsTable').DataTable({
+                "aaSorting": [],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 3
+                }]
+            });
             $('.dataTables_length').addClass('bs-select');
         });
     </script>
