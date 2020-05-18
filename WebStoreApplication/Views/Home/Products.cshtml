@@ -1,7 +1,56 @@
 ﻿
 @{
     ViewData["Title"] = "Products";
+
+    List<ProductModel> products = new List<ProductModel>();
+    //call endpoint to fill data (mocked for now)
+    ProductModel product1 = new ProductModel();
+    product1.productName = "Soap";
+    product1.productID = 1;
+    product1.productDescription = "Cleans stuff";
+    product1.price = 100;
+    product1.userID = 2;
+
+    ProductModel product2 = new ProductModel();
+    product2.productName = "Face Mask";
+    product2.productID = 2;
+    product2.productDescription = "Protects stuff";
+    product2.price = 200;
+    product2.userID = 2;
+
+
+    products.Add(product1);
+    products.Add(product2);
+
 }
 
 <h1>Products</h1>
+
+
+
+<table class="table" id="productsTable">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            foreach (ProductModel product in products)
+            {
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@product.productName</td>
+                    <td>@product.productDescription</td>
+                    <td>@product.price</td>
+                </tr>
+                i++;
+            }
+        }
+    </tbody>
+</table>
 
