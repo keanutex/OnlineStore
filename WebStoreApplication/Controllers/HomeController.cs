@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -25,6 +26,11 @@ namespace WebStoreApplication.Controllers
 
        
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Products()
         {
             return View();
         }
