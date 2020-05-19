@@ -40,10 +40,10 @@ namespace WebStoreApplication.Controllers
             return Ok();
         }
 
-        [HttpPut("")]
-        public IActionResult UpdateProduct(ProductModel product)
+        [HttpPut("{id}")]
+        public IActionResult UpdateProduct(int id, ProductModel product)
         {
-            productAccessor.UpdateProduct(product);
+            productAccessor.UpdateProduct(id, product);
             return Ok();
         }
 
