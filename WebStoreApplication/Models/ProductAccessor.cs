@@ -24,9 +24,9 @@ namespace WebStoreApplication.Models
             return ProductsContext.aggregate.products;
         }  
 
-        public void UpdateProduct(ProductModel product)
+        public void UpdateProduct(int id, ProductModel product)
         {
-            int index = ProductsContext.aggregate.products.FindIndex(pr => pr.productID == product.productID);
+            int index = ProductsContext.aggregate.products.FindIndex(pr => pr.productID == id);
             ProductsContext.aggregate.products[index].productName = product.productName;
             ProductsContext.aggregate.products[index].productDescription = product.productDescription;
             ProductsContext.aggregate.products[index].price = product.price;
