@@ -21,6 +21,8 @@ addProduct has a request body as follows:
   "userID": 0
 }
 
+updateProduct must be sent a url parameter of 'id' to identify the resource in the server and the request body is the same as addProduct.
+
 7) Responses:
 getProduct has response as follows, for a particular product id which we requested for:
 {
