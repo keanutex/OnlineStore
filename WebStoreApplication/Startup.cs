@@ -34,7 +34,7 @@ namespace WebStoreApplication
                 c.IncludeXmlComments(xmlPath);
             });
             
-            services.AddSingleton<IProductAccessor, ProductAccessor>();
+            services.AddSingleton<IAccessDBContext, AccessDBContext>();
 
         }
 
