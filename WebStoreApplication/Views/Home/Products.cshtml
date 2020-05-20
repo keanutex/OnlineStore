@@ -2,32 +2,33 @@
 @using System.Net;
 @using Newtonsoft.Json;
 @using Newtonsoft.Json.Linq;
+@using WebStoreApplication.Global;
 
 @{
     ViewData["Title"] = "Products";
 
-    String result = Get("http://localhost:5000/products/all");
+    /*ProductModel test = new ProductModel();
+    test.productName = "test";
+    test.productDescription = "passed the test";
+    test.productID = 1;
+    test.price = 2;
+    test.userID = 3;
+    string json = JsonConvert.SerializeObject(test);
+    String test1 = Global.Post("http://localhost:5000/products/", json, "application/json", "PUT");*/
 
+    String result = Global.Get("http://localhost:5000/products/all");
 
     List<ProductModel> products = JsonConvert.DeserializeObject<List<ProductModel>>(result);
+
+
+
+
 }
 
-@functions {
-    public string Get(string uri)
-    {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-        request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-
-        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-        using (Stream stream = response.GetResponseStream())
-        using (StreamReader reader = new StreamReader(stream))
-        {
-            return reader.ReadToEnd();
-        }
-    }
-}
 
 <h1>Products</h1>
+
+
 
 <table class="table" id="productsTable">
     <thead>
@@ -35,6 +36,7 @@
             <th scope="col">Product Name</th>
             <th scope="col">Description</th>
             <th scope="col">Price</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -44,7 +46,8 @@
                 <tr>
                     <td>@product.productName</td>
                     <td>@product.productDescription</td>
-                    <td>@product.price</td>
+                    <td>R @product.price</td>
+                    <td><a href="urlForProduct">View</a></td>
                 </tr>
             }
         }
@@ -54,7 +57,13 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-            $('#productsTable').DataTable();
+            $('#productsTable').DataTable({
+                "aaSorting": [],
+                columnDefs: [{
+                    orderable: false,
+                    targets: 3
+                }]
+            });
             $('.dataTables_length').addClass('bs-select');
         });
     </script>
