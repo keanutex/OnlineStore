@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 using WebStoreApplication.Models;
 
 namespace WebStoreApplication.Controllers
@@ -39,6 +40,7 @@ namespace WebStoreApplication.Controllers
             return Ok(dbAccessor.GetAllProducts());
         }
 
+        
         [HttpDelete("{id}")]
         public IActionResult RemoveProduct(int id)
         {
