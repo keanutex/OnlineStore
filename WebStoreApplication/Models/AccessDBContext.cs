@@ -31,5 +31,17 @@ namespace WebStoreApplication.Models
             string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.Product";
             return CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query).AsList();
         }
+
+        public UserModel GetUser(int userID)
+        {
+            string query = @"SELECT * FROM [dbo].[UserView] where id=@id;";
+            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<UserModel>(query,new{ id = userID });
+        }
+
+        public int UpdateUser(int userID , UserModel user)
+        {
+            string query = @"UPDATE [CoroNacessitiesDB].[dbo].[AspNetUsers] SET Name = @Name, Surname=@Surname , Email,@Email ,PhoneNumber= @PhoneNumber, Rating=@Rating ,PayPalInfo = @PayPalInfo WHERE id = @id";
+            return CoroNacessitiesDBContext.getConnection().Execute(query, new { id=userID, Name=user.Name , Surname = user.Surname , Email = user.Email , PhoneNumber = user.PhoneNumber , Rating = user.Rating , PayPalInfo = user.PayPalInfo});
+        }
     }
 }
