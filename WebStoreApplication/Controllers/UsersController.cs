@@ -3,35 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStoreApplication.Models;
 
 namespace WebStoreApplication.Controllers
 {
+    [Route("user/")]
     [ApiController]
     public class UsersController : Controller
     {
-        /// <summary>
-        /// Adds user to the DB
-        /// </summary>
-        /// <param name="id"></param>        
-        [HttpPost("Users/AddUser/{id}")]
-        public IActionResult AddUser(long id)
+        private readonly IAccessDBContext dbAccessor;
+
+        public UsersController(IAccessDBContext dbAccessor)
         {
-            // code code code
-            Console.Write(id);
-            return NoContent();
+            this.dbAccessor = dbAccessor;
         }
 
-
-        /// <summary>
-        /// Returns all the users in the DB
-        /// </summary>
-        [HttpGet("Users/GetUsers")]
-        public IActionResult GetUsers(long id)
+        [HttpGet("{id}")]
+        public IActionResult GetUser(int id)
         {
-            // code code code
-            Console.Write(id);
-            return NoContent();
+            try
+            {
+                return Ok(dbAccessor.GetUser(id));
+            }
+            catch(Exception ex)
+            {
+                return NotFound(ex);
+            }
+            
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(int id , UserModel user)
+        {
+            if (dbAccessor.UpdateUser(id , user) == 1)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+       
 
     }
 }

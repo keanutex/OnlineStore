@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
 using WebStoreApplication.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebStoreApplication
 {
@@ -23,6 +24,16 @@ namespace WebStoreApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddIdentity<UserModel, UserRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<IdentityAppContext>();
+
+            services.AddDbContext<IdentityAppContext>(cfg =>
+            {
+                cfg.UseSqlServer(Configuration.GetConnectionString("AppData"));
+            });
             services.AddControllersWithViews();
 
             services.AddSwaggerGen(c =>
@@ -34,14 +45,14 @@ namespace WebStoreApplication
                 c.IncludeXmlComments(xmlPath);
             });
             
-            services.AddSingleton<IProductAccessor, ProductAccessor>();
+            services.AddSingleton<IAccessDBContext, AccessDBContext>();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
+           
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -66,7 +77,7 @@ namespace WebStoreApplication
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
