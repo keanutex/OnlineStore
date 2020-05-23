@@ -1,5 +1,5 @@
 CREATE TABLE CoroNacessitiesDB.dbo.ProductType(
-[TypeID] INT IDENTITY(1,1) NOT NULL,
+[TypeID] INT NOT NULL AUTO_INCREMENT,
 [TypeName] VARCHAR(50) NOT NULL,
 PRIMARY KEY ([TypeID])
 );
