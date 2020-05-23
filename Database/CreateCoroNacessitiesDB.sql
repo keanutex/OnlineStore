@@ -34,10 +34,6 @@ print 'created ProductType table'
 
 print 'created Status table'
 
-:r $(path)\CreateUsersTable.sql
-
-print 'created Users table'
-
 print '---------created all tables---------' 
 
 GO
@@ -50,5 +46,23 @@ GO
 print 'created foreign keys for Users table and Product table'
 
 print '---------created all foreign keys---------'
+
+GO
+
+
+:r $(path)/InsertScript.sql
+
+print '---------Inserts Done---------'
+
+GO
+
+
+:r $(path)/CreateUserView.sql
+
+print 'added the create user view'
+
+GO
+
+print '---------Views Done---------'
 
 GO
