@@ -1,1 +1,1 @@
-sqlcmd -S ServerName -i CreateCoroNacessitiesDB.sql
+sqlcmd -S servername -i CreateCoroNacessitiesDB.sql
