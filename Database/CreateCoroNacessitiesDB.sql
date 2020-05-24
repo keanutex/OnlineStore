@@ -50,7 +50,7 @@ print '---------created all foreign keys---------'
 GO
 
 
-:r $(path)/InsertScript.sql
+:r $(path)/InsertDataScript.sql
 
 print '---------Inserts Done---------'
 
@@ -60,8 +60,6 @@ GO
 :r $(path)/CreateUserView.sql
 
 print 'added the create user view'
-
-GO
 
 print '---------Views Done---------'
 
