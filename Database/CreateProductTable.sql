@@ -6,6 +6,6 @@ CREATE TABLE CoroNacessitiesDB.dbo.Product(
 [Price] DECIMAL(10,2) NOT NULL,
 [StatusID] INT NOT NULL,
 [TypeID] INT NOT NULL,
-[ProductImage] VARBINARY(MAX),
+[ProductImage] VARCHAR(MAX),
 PRIMARY KEY ([ProductID])
 );
