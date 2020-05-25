@@ -38,6 +38,10 @@ print 'created ProductStatus table'
 
 print 'created OrderStatus table'
 
+:r $(path)\CreateOrdersTable.sql
+
+print 'created Orders table'
+
 print '---------created all tables---------' 
 
 :r $(path)\CreateUsersTable.sql

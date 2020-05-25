@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS dbo.Product;
 CREATE TABLE CoroNacessitiesDB.dbo.Product(
 [ProductID] INT IDENTITY(1,1) NOT NULL,
 [UserID] INT NOT NULL,
