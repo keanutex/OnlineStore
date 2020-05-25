@@ -60,14 +60,14 @@ namespace WebStoreApplication.Models
                 sci => sci.ProductModel.productID == product.productID
                 && sci.ShoppingCartID == ShoppingCartID);
 
-            var currentAmount = 0;
+            var currentNoOfProducts = 0;
 
             if (shoppingCartItem != null)
             {
                 if (shoppingCartItem.NoOfProducts > 1)
                 {
                     shoppingCartItem.NoOfProducts--;
-                    currentAmount = shoppingCartItem.NoOfProducts;
+                    currentNoOfProducts = shoppingCartItem.NoOfProducts;
                 }
                 else
                 {
@@ -75,18 +75,18 @@ namespace WebStoreApplication.Models
                 }
             }
             _appDbContext.SaveChanges();
-            return currentAmount;
+            return currentNoOfProducts;
         }
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
             return GetShoppingCartItems ?? (ShoppingCartItems = _appDbContext.ShoppingCartItems.Where(
-               scID => scID.ShoppingCartID == ShoppingCartID)
-               // add some more checks here?
-                );
+               scID => scID.ShoppingCartID == ShoppingCartID).Include(s => s.Product).ToList());
         }
         public void ClearShoppingCart()
         {
-            // add logic
+            var shoppingCartItems = _appDbContext.Shopping_CartItems.Where(c => c.ShoppingCartID == ShoppingCartID);
+
+            _appDbContext.Shopping_CartItems.RemoveRange(shoppingCartItems);
             _appDbContext.SaveChanges();
         }
         public decimal GetShoppingCartTotal()
