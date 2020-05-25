@@ -31,7 +31,7 @@ namespace WebStoreApplication.Models
             return new ShoppingCart(context) { ShoppingCartID = cartID };
         }
 
-        public void AddToShoppingCart(ProductModel product, int amount)
+        public void AddToShoppingCart(ProductModel product, int noOfProducts)
         {
             var shoppingCartItem = _appDbContext.ShoppingCartItems.SingleOrDefault(
                 sc => sc.ProductModel.productID == product.productID
@@ -43,14 +43,14 @@ namespace WebStoreApplication.Models
                 {
                     ShoppingCartID = ShoppingCartID,
                     Product = product,
-                    Amount = amount
+                    NoOfProducts = noOfProducts
                 };
 
                 _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
             {
-                shoppingCartItem.Amount++;
+                shoppingCartItem.NoOfProducts++;
             }
             _appDbContext.SaveChanges();
         }
@@ -64,10 +64,10 @@ namespace WebStoreApplication.Models
 
             if (shoppingCartItem != null)
             {
-                if (shoppingCartItem.Amount > 1)
+                if (shoppingCartItem.NoOfProducts > 1)
                 {
-                    shoppingCartItem.Amount--;
-                    currentAmount = shoppingCartItem.Amount;
+                    shoppingCartItem.NoOfProducts--;
+                    currentAmount = shoppingCartItem.NoOfProducts;
                 }
                 else
                 {
@@ -91,7 +91,8 @@ namespace WebStoreApplication.Models
         }
         public decimal GetShoppingCartTotal()
         {
-            var totalPrice = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartID == ShoppingCartID).Select(c => c.Product.Price * c.Amount).Sum();
+            var totalPrice = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartID == ShoppingCartID).Select(c => c.Product.Price * c.NoOfProducts).Sum();
+            return totalPrice;
         }
     }
 }

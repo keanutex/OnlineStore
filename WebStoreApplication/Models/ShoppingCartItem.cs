@@ -10,7 +10,7 @@ namespace WebStoreApplication.Models
         public string ShoppingCartID { get; set; }
         public int ShoppingCartItemID { get; set; }
         public ProductModel Product {get; set;}
-        public int Amount { get; set; }
+        public int NoOfProducts { get; set; }
 
     }
 }
