@@ -35,6 +35,9 @@ namespace WebStoreApplication
                 cfg.UseSqlServer(Configuration.GetConnectionString("AppData"));
             });
             services.AddControllersWithViews();
+            services.AddScoped<ShoppingCart>(sc => ShoppingCart.GetShoppingCart(sc));
+            services.AddHttpContextAccessor();
+            services.AddSession();
 
             services.AddSwaggerGen(c =>
             {
@@ -75,7 +78,7 @@ namespace WebStoreApplication
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

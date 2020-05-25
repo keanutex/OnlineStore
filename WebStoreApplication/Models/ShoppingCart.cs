@@ -91,7 +91,7 @@ namespace WebStoreApplication.Models
         }
         public decimal GetShoppingCartTotal()
         {
-            //var totalPrice = 
+            var totalPrice = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartID == ShoppingCartID).Select(c => c.Product.Price * c.Amount).Sum();
         }
     }
 }
