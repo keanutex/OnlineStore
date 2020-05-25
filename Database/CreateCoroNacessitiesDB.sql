@@ -30,9 +30,13 @@ print 'created Product table'
 
 print 'created ProductType table'
 
-:r $(path)\CreateStatusTable.sql
+:r $(path)\CreateProductStatusTable.sql
 
-print 'created Status table'
+print 'created ProductStatus table'
+
+:r $(path)\CreateOrderStatusTable.sql
+
+print 'created OrderStatus table'
 
 print '---------created all tables---------' 
 
