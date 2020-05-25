@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS dbo.Users;
 CREATE TABLE CoroNacessitiesDB.dbo.Users(
 [UserID] INT IDENTITY(1,1) NOT NULL,
 [Username] VARCHAR(50) NOT NULL,

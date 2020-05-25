@@ -69,6 +69,19 @@ GO
 
 print 'ProductStatus inserts done'
 
+SET IDENTITY_INSERT [dbo].[Orders] ON 
+GO
+INSERT [dbo].[Orders] ([EntryIntoTableID], [OrderID], [UserID], [ProductID], [NoOfProducts], [OrderStatusID]) VALUES (1, 1, 1, 2, 5, 2)
+GO
+INSERT [dbo].[Orders] ([EntryIntoTableID], [OrderID], [UserID], [ProductID], [NoOfProducts], [OrderStatusID]) VALUES (2, 1, 1, 3, 2, 2)
+GO
+INSERT [dbo].[Orders] ([EntryIntoTableID], [OrderID], [UserID], [ProductID], [NoOfProducts], [OrderStatusID]) VALUES (3, 2, 6, 1, 2, 4)
+GO
+INSERT [dbo].[Orders] ([EntryIntoTableID], [OrderID], [UserID], [ProductID], [NoOfProducts], [OrderStatusID]) VALUES (4, 3, 4, 1, 1, 5)
+GO
+SET IDENTITY_INSERT [dbo].[Orders] OFF
+GO
+
 SET IDENTITY_INSERT [dbo].[OrderStatus] ON 
 GO
 INSERT [dbo].[OrderStatus] ([OrderStatusID], [OrderStatusDescription]) VALUES (1, N'Cancelled')
@@ -90,13 +103,13 @@ INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[
 GO
 INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID]) VALUES (2, N'Dylan', N'Dylan', N'Carstens', N'Dylan@Cartstens.co.za', N'1234567890', N'5', N'Image2', 2)
 GO
-INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID]) VALUES (9, N'Hannelie', N'Hannelie', N'Van Rensburg', N'Hannelie@jvr.co.za', N'2345678901', N'5', N'Image3', 3)
+INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID]) VALUES (3, N'Hannelie', N'Hannelie', N'Van Rensburg', N'Hannelie@jvr.co.za', N'2345678901', N'5', N'Image3', 3)
 GO
 INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID]) VALUES (4, N'Keanu', N'Keanu', N'Teixera', N'Keanu@Teixera.co.za', N'3456789012', N'5', N'Image4', 4)
 GO
 INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID]) VALUES (5, N'Ronaldo', N'Ronaldo', N'Ronaldo', N'Ronaldo@Ronaldo.co.za', N'4567890123', N'5', N'Image5', 5)
 GO
-INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID]) VALUES (10, N'Vignesh', N'Vignesh', N'Iyer', N'Vignesh@Iyer.co.za', N'5678901234', N'5', N'Image6', 6)
+INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID]) VALUES (6, N'Vignesh', N'Vignesh', N'Iyer', N'Vignesh@Iyer.co.za', N'5678901234', N'5', N'Image6', 6)
 GO
 SET IDENTITY_INSERT [dbo].[Users] OFF
 GO

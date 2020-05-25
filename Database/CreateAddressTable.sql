@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS dbo.Address;
 CREATE TABLE CoroNacessitiesDB.dbo.Address
 (
     [AddressID] BIGINT NOT NULL IDENTITY,
