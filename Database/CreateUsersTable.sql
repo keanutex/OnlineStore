@@ -9,5 +9,6 @@ CREATE TABLE CoroNacessitiesDB.dbo.Users(
 [Rating] INT NOT NULL,
 [PayPalInfo] VARCHAR(50) NOT NULL,
 [AddressID] INT NOT NULL,
+[Password] VARCHAR(50) NOT NULL,
 PRIMARY KEY ([UserID])
 );
