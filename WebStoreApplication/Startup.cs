@@ -35,7 +35,6 @@ namespace WebStoreApplication
                 cfg.UseSqlServer(Configuration.GetConnectionString("AppData"));
             });
             services.AddControllersWithViews();
-            services.AddScoped<ShoppingCart>(sc => ShoppingCart.GetShoppingCart(sc));
             services.AddHttpContextAccessor();
             services.AddSession();
 
