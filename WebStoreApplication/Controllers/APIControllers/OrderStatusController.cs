@@ -1,21 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStoreApplication.Models;
 
-
-// Order Status
-public int AddOrderStatus(OrderStatusModel orderStatus);
-public OrdersModel GetOrderStatus(int orderStatusID);
-public List<OrderStatusModel> GetAllOrdersStatuses()
-
-
-
-public int RemoveOrderStatus(int orderStatusID);
-public int UpdateOrderStatus(int orderStatusID, OrderStatusModel orderStatus);
-
-
-
-
-
 namespace WebStoreApplication.Controllers.APIControllers
 {
     [Route("orderstatus/")]
