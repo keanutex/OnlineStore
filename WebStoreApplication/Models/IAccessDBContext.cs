@@ -29,7 +29,7 @@ namespace WebStoreApplication.Models
         // Order Status
         public int AddOrderStatus(OrderStatusModel orderStatus);
         public int RemoveOrderStatus(int orderStatusID);
-        public OrdersModel GetOrderStatus(int orderStatusID);
+        public OrderStatusModel GetOrderStatus(int orderStatusID);
         public int UpdateOrderStatus(int orderStatusID, OrderStatusModel orderStatus);
         public List<OrderStatusModel> GetAllOrdersStatuses();
 
