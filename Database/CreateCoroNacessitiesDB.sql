@@ -19,28 +19,31 @@ print '---------Created Database---------'
 --create all the tables
 
 :r $(path)\CreateAddressTable.sql
-
 print 'created Address table'
 
 :r $(path)\CreateProductTable.sql
-
 print 'created Product table'
 
 :r $(path)\CreateProductTypeTable.sql
-
 print 'created ProductType table'
 
 :r $(path)\CreateProductStatusTable.sql
-
 print 'created ProductStatus table'
 
 :r $(path)\CreateOrderStatusTable.sql
-
 print 'created OrderStatus table'
 
 :r $(path)\CreateOrdersTable.sql
-
 print 'created Orders table'
+
+:r $(path)\CreateCityTable.sql
+print 'created City table'
+
+:r $(path)\CreateOrderItemTable.sql
+print 'created OrderItem table'
+
+:r $(path)\CreateUsersTable.sql
+print 'created Users table'
 
 print '---------created all tables---------' 
 
