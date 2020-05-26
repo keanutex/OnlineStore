@@ -3,30 +3,57 @@ GO
 
 SET IDENTITY_INSERT [dbo].[Address] ON
 GO
-INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [City], [Province], [Country]) VALUES (1, NULL, NULL, N' West Green Old Freeway', 49, N'Farnham', N'Montgomery', N'Northern Cape', N'South Africa ')
+INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [CityID]) VALUES (1, NULL, NULL, N' West Green Old Freeway', 49, N'Farnham', 7)
 GO
-INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [City], [Province], [Country]) VALUES (2, NULL, NULL, N' North Rocky Milton Parkway', 274, N'Dolwyddelan', N'St. Paul', N'North West', N'South Africa ')
+INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [CityID]) VALUES (2, NULL, NULL, N' North Rocky Milton Parkway', 274, N'Dolwyddelan', 3)
 GO
-INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [City], [Province], [Country]) VALUES (3, NULL, NULL, N' South Green Oak Blvd.', 67, N'Cwmbran', N'Bakersfield', N'KwaZulu Natal', N'South Africa ')
+INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [CityID]) VALUES (3, NULL, NULL, N' South Green Oak Blvd.', 67, N'Cwmbran', 2)
 GO
-INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [City], [Province], [Country]) VALUES (4, NULL, NULL, N' East Rocky Nobel Road', 146, N'Moffat', N'Yonkers', N'Free State', N'South Africa ')
+INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [CityID]) VALUES (4, NULL, NULL, N' East Rocky Nobel Road', 146, N'Moffat', 4)
 GO
-INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [City], [Province], [Country]) VALUES (5, NULL, NULL, N' East Rocky Hague Road', 237, N'Ipswich', N'Glendale', N'Western Cape', N'South Africa ')
+INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [CityID]) VALUES (5, NULL, NULL, N' East Rocky Hague Road', 237, N'Ipswich', 8)
 GO
-INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [City], [Province], [Country]) VALUES (6, NULL, NULL, N' West Green First Parkway', 99, N'Walsingham', N'Des Moines', N'Limpopo', N'South Africa ')
+INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [CityID]) VALUES (6, NULL, NULL, N' West Green First Parkway', 99, N'Walsingham', 6)
 GO
-INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [City], [Province], [Country]) VALUES (7, NULL, NULL, N' North White Second Avenue', 212, N'Broadstone', N'Anaheim', N'Eastern Cape', N'South Africa ')
+INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [CityID]) VALUES (7, NULL, NULL, N' North White Second Avenue', 212, N'Broadstone', 5)
 GO
-INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [City], [Province], [Country]) VALUES (8, NULL, NULL, N' East White New Road', 130, N'West Kensington', N'Cincinnati', N'Western Cape', N'South Africa ')
+INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [CityID]) VALUES (8, NULL, NULL, N' East White New Road', 130, N'West Kensington', 10)
 GO
-INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [City], [Province], [Country]) VALUES (9, N'Fossil SecondJefferson Building', 24, N' East Rocky Milton Parkway', 54, N'Malton', N'Aurora', N'Eastern Cape', N'South Africa ')
+INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [CityID]) VALUES (9, N'Fossil SecondJefferson Building', 24, N' East Rocky Milton Parkway', 54, N'Malton', 1)
 GO
-INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [City], [Province], [Country]) VALUES (10, N'FabienHamilton Building', 13, N' North Green New Blvd.', 108, N'Boncath', N'Omaha', N'KwaZulu Natal', N'South Africa ')
+INSERT [dbo].[Address] ([AddressID], [ComplexName], [UnitNumber], [StreetName], [StreetNumber], [Suburb], [CityID]) VALUES (10, N'FabienHamilton Building', 13, N' North Green New Blvd.', 108, N'Boncath', 9)
 GO
 SET IDENTITY_INSERT [dbo].[Address] OFF
 GO
 
-print 'Adress inserts done'
+print 'Adress table inserts done'
+
+SET IDENTITY_INSERT [dbo].[City] ON
+GO
+INSERT [dbo].[City] ([CityID], [Longitude], [Latitude], [CityName]) VALUES (1, N'31.049999', N'-29.883333', N'Durban')
+GO
+INSERT [dbo].[City] ([CityID], [Longitude], [Latitude], [CityName]) VALUES (2, N'27.865833', N'-26.266111', N'Soweto')
+GO
+INSERT [dbo].[City] ([CityID], [Longitude], [Latitude], [CityName]) VALUES (3, N'26.154898', N'-29.087217', N'Bloemfontein')
+GO
+INSERT [dbo].[City] ([CityID], [Longitude], [Latitude], [CityName]) VALUES (4, N'25.619022', N'-33.958252', N'Port Elizabeth')
+GO
+INSERT [dbo].[City] ([CityID], [Longitude], [Latitude], [CityName]) VALUES (5, N'28.218370', N'-25.731340', N'Pretoria')
+GO
+INSERT [dbo].[City] ([CityID], [Longitude], [Latitude], [CityName]) VALUES (6, N'28.034088', N'-26.195246', N'Johannesburg')
+GO
+INSERT [dbo].[City] ([CityID], [Longitude], [Latitude], [CityName]) VALUES (7, N'25.640181', N'-25.853161', N'Mahikeng')
+GO
+INSERT [dbo].[City] ([CityID], [Longitude], [Latitude], [CityName]) VALUES (8, N'29.255323', N'-25.872782', N'Emalahleni')
+GO
+INSERT [dbo].[City] ([CityID], [Longitude], [Latitude], [CityName]) VALUES (9, N'27.901464', N'-26.120134', N'Roodepoort')
+GO
+INSERT [dbo].[City] ([CityID], [Longitude], [Latitude], [CityName]) VALUES (10, N'22.457581', N'-33.977074', N'George')
+GO
+SET IDENTITY_INSERT [dbo].[City] OFF
+GO
+
+print 'City table inserts done'
 
 SET IDENTITY_INSERT [dbo].[Product] ON
 GO
@@ -43,7 +70,7 @@ GO
 SET IDENTITY_INSERT [dbo].[Product] OFF
 GO
 
-print 'Product inserts done'
+print 'Product table inserts done'
 
 SET IDENTITY_INSERT [dbo].[ProductType] ON
 GO
@@ -56,7 +83,7 @@ GO
 SET IDENTITY_INSERT [dbo].[ProductType] OFF
 GO
 
-print 'ProductType inserts done'
+print 'ProductType table inserts done'
 
 SET IDENTITY_INSERT [dbo].[ProductStatus] ON
 GO
@@ -67,20 +94,39 @@ GO
 SET IDENTITY_INSERT [dbo].[ProductStatus] OFF
 GO
 
-print 'ProductStatus inserts done'
+print 'ProductStatus table inserts done'
 
 SET IDENTITY_INSERT [dbo].[Orders] ON 
 GO
-INSERT [dbo].[Orders] ([EntryIntoTableID], [OrderID], [UserID], [ProductID], [NoOfProducts], [OrderStatusID]) VALUES (1, 1, 1, 2, 5, 2)
+INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (1, 1, 2)
 GO
-INSERT [dbo].[Orders] ([EntryIntoTableID], [OrderID], [UserID], [ProductID], [NoOfProducts], [OrderStatusID]) VALUES (2, 1, 1, 3, 2, 2)
+INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (2, 1, 2)
 GO
-INSERT [dbo].[Orders] ([EntryIntoTableID], [OrderID], [UserID], [ProductID], [NoOfProducts], [OrderStatusID]) VALUES (3, 2, 6, 1, 2, 4)
+INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (3, 2, 4)
 GO
-INSERT [dbo].[Orders] ([EntryIntoTableID], [OrderID], [UserID], [ProductID], [NoOfProducts], [OrderStatusID]) VALUES (4, 3, 4, 1, 1, 5)
+INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (4, 3, 5)
 GO
 SET IDENTITY_INSERT [dbo].[Orders] OFF
 GO
+
+print 'Orders table inserts done'
+
+
+SET IDENTITY_INSERT [dbo].[OrderItem] ON 
+GO
+INSERT [dbo].[OrderItem] ([OrderItemID], [OrderID], [ProductID], [NoOfProducts]) VALUES (1, 1, 2, 1)
+GO
+INSERT [dbo].[OrderItem] ([OrderItemID], [OrderID], [ProductID], [NoOfProducts]) VALUES (2, 1, 2, 5)
+GO
+INSERT [dbo].[OrderItem] ([OrderItemID], [OrderID], [ProductID], [NoOfProducts]) VALUES (3, 2, 4, 2)
+GO
+INSERT [dbo].[OrderItem] ([OrderItemID], [OrderID], [ProductID], [NoOfProducts]) VALUES (4, 3, 5, 6)
+GO
+SET IDENTITY_INSERT [dbo].[OrderItem] OFF
+GO
+
+print 'OrderItem table inserts done'
+
 
 SET IDENTITY_INSERT [dbo].[OrderStatus] ON 
 GO
@@ -96,6 +142,8 @@ INSERT [dbo].[OrderStatus] ([OrderStatusID], [OrderStatusDescription]) VALUES (5
 GO
 SET IDENTITY_INSERT [dbo].[OrderStatus] OFF
 GO
+
+print 'OrderStatus table inserts done'
 
 SET IDENTITY_INSERT [dbo].[Users] ON
 GO
@@ -114,4 +162,4 @@ GO
 SET IDENTITY_INSERT [dbo].[Users] OFF
 GO
 
-print 'Users inserts done'
+print 'Users table inserts done'
