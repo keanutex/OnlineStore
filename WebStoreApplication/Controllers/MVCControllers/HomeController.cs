@@ -50,6 +50,16 @@ namespace WebStoreApplication.Controllers
             return View();
         }
 
+        public IActionResult viewProfile()
+        {
+            return View();
+        }
+
+        public IActionResult editProfile()
+        {
+            return View();
+        }
+
         public IActionResult ProductDetails()
         {
             return View();
