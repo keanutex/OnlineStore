@@ -32,6 +32,8 @@ namespace WebStoreApplication
             });
 
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
+            services.AddSession();
 
             services.AddSwaggerGen(c =>
             {
@@ -73,7 +75,7 @@ namespace WebStoreApplication
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
