@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStoreApplication.Models;
@@ -12,63 +14,49 @@ namespace WebStoreApplication.Controllers
     [ApiController]
     public class AccountController : Controller
     {
-        private UserManager<UserModel> UserMgr { get; }
-        private SignInManager<UserModel> SignInMgr { get; }
-        public AccountController(UserManager<UserModel>userManager,SignInManager<UserModel>signInManager)
+        private readonly IAccessDBContext dbAccessor;
+
+        private readonly Common common;
+
+        public AccountController(IAccessDBContext dbAccessor)
         {
-            UserMgr = userManager;
-            SignInMgr = signInManager;
+            this.dbAccessor = dbAccessor;
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginModel login)
+        public IActionResult Login(LoginModel login)
         {
-            var result = await SignInMgr.PasswordSignInAsync(login.Username, login.Password, false, false);
-            if(result.Succeeded)
+            
+            if(common.CreateHashPassword(login.password).Equals(dbAccessor.GetUserPassword(login.username), StringComparison.InvariantCultureIgnoreCase))
             {
-                return RedirectToAction("Index", "Home");
+                return Ok();
+            }
+            else{
+                return Unauthorized();
+            }
+
+        }
+
+        [HttpPost("register")]
+        public IActionResult Register(RegisterModel newUser )
+        {
+          
+            if (dbAccessor.GetUser(newUser.username).userId>0)
+            {
+                return BadRequest("Username already exists");
+            }
+            newUser.password = common.CreateHashPassword(newUser.password);
+            if (dbAccessor.AddUser(newUser) == 1)
+            {
+                return Ok();
             }
             else
             {
-                ViewBag.Result = "result is "+result.ToString();
-                return BadRequest(result);
+                return BadRequest();
             }
-           
-
 
         }
 
-        [HttpPost("register/{password}")]
-        public async Task<IActionResult> Register(UserModel newUser , string password)
-        {
-           
-            try
-            {
-                ViewBag.Message = "User already registered";
-                UserModel user = await UserMgr.FindByNameAsync(newUser.UserName);
-               
-                if (user == null)
-                {
-                    IdentityResult result = await UserMgr.CreateAsync(newUser, password);
-                    ViewBag.Message = "User was created";
-                    if (result.Succeeded == false)
-                    {
-                        return BadRequest(result);
-                    }
-                    else
-                    {
-                        return Ok();
-                    }
-                    
-
-                }
-            }
-            catch(Exception ex)
-            {
-                ViewBag.Message = ex;
-                return BadRequest(ex);
-            }
-            return View();
-        }
+        
     }
 }
