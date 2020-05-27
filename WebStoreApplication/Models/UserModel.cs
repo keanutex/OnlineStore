@@ -2,18 +2,19 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WebStoreApplication.Models
 {
-    public class UserModel : IdentityUser<int>
+    public class UserModel
     {
 
-        public override int Id { get; set;}
-        public override string UserName { get; set; }
-        public  string Name { get; set; }
-        public  string Surname { get; set; }
-        public override string Email { get; set; }
-        public override string PhoneNumber { get; set; }
-        public int Rating {get; set;}
-        public string PayPalInfo { get; set; }
-        public int AddressID {get;set;}
+        public int userId { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string email { get; set; }
+        public string contactNo { get; set; }
+        public int rating { get ; set; } 
+        public string payPalInfo { get; set; }
+        public int addressId { get; set; }
 
         public UserModel()
         {
