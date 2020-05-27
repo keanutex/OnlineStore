@@ -9,7 +9,7 @@ namespace WebStoreApplication.Models
         public int userID {get; set;}
         public int statusID {get; set;}
         public int typeID {get; set;}
-        public string productImage {get; set;}
+        public byte [] productImage {get; set;}
 
         public ProductModel()
         {
