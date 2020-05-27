@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200522065353_CreateIdentitySchema.cs" />
-    <Compile Remove="Migrations\20200522065353_CreateIdentitySchema.Designer.cs" />
-    <Compile Remove="Migrations\20200522075115_CreateIdentitySchema.cs" />
-    <Compile Remove="Migrations\20200522075115_CreateIdentitySchema.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="Data\Products.json" />
     <Content Remove="Data\Users.json" />
   </ItemGroup>

@@ -25,15 +25,6 @@ namespace WebStoreApplication
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddIdentity<UserModel, UserRole>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<IdentityAppContext>();
-
-            services.AddDbContext<IdentityAppContext>(cfg =>
-            {
-                cfg.UseSqlServer(Configuration.GetConnectionString("AppData"));
-            });
             services.AddControllersWithViews();
 
             services.AddSwaggerGen(c =>
