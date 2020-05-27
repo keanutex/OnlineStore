@@ -46,6 +46,7 @@ namespace WebStoreApplication
             });
             
             services.AddSingleton<IAccessDBContext, AccessDBContext>();
+            services.AddSingleton<IAccessPayPalAPI, AccessPayPalAPI>();
 
         }
 
