@@ -57,15 +57,15 @@ print 'City table inserts done'
 
 SET IDENTITY_INSERT [dbo].[Product] ON
 GO
-INSERT [dbo].[Product] ([ProductID],[UserID],[ProductName],[ProductDescription],[Price],[ProductStatusID],[TypeID],[ProductImage]) VALUES (1,1, N'Face Mask', N'Face Mask', N'20.00', 1, 1, N'Image1')
+INSERT [dbo].[Product] ([ProductID],[UserID],[ProductName],[ProductDescription],[Price],[ProductStatusID],[TypeID],[ProductImage]) VALUES (1,1, N'Face Mask', N'Face Mask', N'20.00', 1, 1, 0)
 GO
-INSERT [dbo].[Product] ([ProductID],[UserID],[ProductName],[ProductDescription],[Price],[ProductStatusID],[TypeID],[ProductImage]) VALUES (2,4, N'Hand Sanitizer', N'Hand Sanitizer', N'40.00', 1, 2, N'Image2')
+INSERT [dbo].[Product] ([ProductID],[UserID],[ProductName],[ProductDescription],[Price],[ProductStatusID],[TypeID],[ProductImage]) VALUES (2,4, N'Hand Sanitizer', N'Hand Sanitizer', N'40.00', 1, 2, 0)
 GO
-INSERT [dbo].[Product] ([ProductID],[UserID],[ProductName],[ProductDescription],[Price],[ProductStatusID],[TypeID],[ProductImage]) VALUES (3,6, N'Surgical Gloves', N'Surgical Gloves', N'22.50', 2, 3, N'Image3')
+INSERT [dbo].[Product] ([ProductID],[UserID],[ProductName],[ProductDescription],[Price],[ProductStatusID],[TypeID],[ProductImage]) VALUES (3,6, N'Surgical Gloves', N'Surgical Gloves', N'22.50', 2, 3, 0)
 GO
-INSERT [dbo].[Product] ([ProductID],[UserID],[ProductName],[ProductDescription],[Price],[ProductStatusID],[TypeID],[ProductImage]) VALUES (4,1, N'Face Shield', N'Face Shield', N'60.00', 1, 1, N'Image4')
+INSERT [dbo].[Product] ([ProductID],[UserID],[ProductName],[ProductDescription],[Price],[ProductStatusID],[TypeID],[ProductImage]) VALUES (4,1, N'Face Shield', N'Face Shield', N'60.00', 1, 1, 0)
 GO
-INSERT [dbo].[Product] ([ProductID],[UserID],[ProductName],[ProductDescription],[Price],[ProductStatusID],[TypeID],[ProductImage]) VALUES (5,3, N'Latex Gloves', N'Latex Gloves', N'25.00', 1, 3, N'Image5')
+INSERT [dbo].[Product] ([ProductID],[UserID],[ProductName],[ProductDescription],[Price],[ProductStatusID],[TypeID],[ProductImage]) VALUES (5,3, N'Latex Gloves', N'Latex Gloves', N'25.00', 1, 3, 0)
 GO
 SET IDENTITY_INSERT [dbo].[Product] OFF
 GO
