@@ -31,15 +31,6 @@ namespace WebStoreApplication
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
             });
 
-            services.AddIdentity<UserModel, UserRole>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<IdentityAppContext>();
-
-            services.AddDbContext<IdentityAppContext>(cfg =>
-            {
-                cfg.UseSqlServer(Configuration.GetConnectionString("AppData"));
-            });
             services.AddControllersWithViews();
 
             services.AddSwaggerGen(c =>
