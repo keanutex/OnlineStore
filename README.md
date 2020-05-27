@@ -21,6 +21,8 @@ addProduct has a request body as follows:
   "userID": 0
 }
 
+updateProduct must be sent a url parameter of 'id' to identify the resource in the server and the request body is the same as addProduct.
+
 7) Responses:
 getProduct has response as follows, for a particular product id which we requested for:
 {
@@ -32,3 +34,7 @@ getProduct has response as follows, for a particular product id which we request
     "userID": 7
   }
 }
+
+User Admin setup 
+1)change connection string in appsettings.json
+2)run "update-database --verbose" on package manager console and create UserView, sql has been added.
