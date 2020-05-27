@@ -6,36 +6,33 @@
 
 @{
     ViewData["Title"] = "ProductDetails";
-
-
-    //String result = Global.Get("http://localhost:5000/products/1");
-
-    //ProductModel products = JsonConvert.DeserializeObject<ProductModel>(result);
-
-
 }
 
 <h1>Product Details</h1>
 
-<h1 style="text-align: center;">PRODUCT NAME</h1>
+<h1 style="text-align: center;" id="productName">PRODUCT NAME</h1>
 <h1 style="text-align: center;"><img src="blobgoeshere" target="_blank" class="img-fluid" style="font-size: 1rem; text-align: left;"></h1>
 <p style="text-align: left;" id="price">
     <b>
         PRICE:
+    </b>
 </p>
 <br>
 <br>
-<p style="text-align: left;" id="type">
+
+<p style="text-align: left;" id="description">
     <b>
-        TYPE:
+        DESCRIPTION:
+    </b>
 </p>
 <br>
 <br>
 <p style="text-align: left;">
     <b>
         ETC:
-</p>
     </b>
+</p>
+    
 
 
 @section Scripts{
@@ -43,10 +40,9 @@
         var id = localStorage.getItem("productSelected");
         $(document).ready(function () {
             $.get("http://localhost:5000/products/" + id, function (data) {
-                // Only here you should use the data variable as it is here and only here
-                // that it is assigned
-                document.getElementById("price").innerHTML = "Price" + data.price;
-                document.getElementById("type").innerHTML = "Type" + type.price;
+                document.getElementById("productName").innerHTML = data.productName;
+                document.getElementById("price").innerHTML = ("Price: " + data.price).bold();
+                document.getElementById("description").innerHTML = ("Description: " + data.productDescription).bold();
 
             })
         });

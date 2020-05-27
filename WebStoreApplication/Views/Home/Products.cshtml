@@ -19,14 +19,9 @@
     String result = Global.Get("http://localhost:5000/products/all");
 
     List<ProductModel> products = JsonConvert.DeserializeObject<List<ProductModel>>(result);
-
-
 }
 
-
 <h1>Products</h1>
-
-
 
 <table class="table" id="productsTable">
     <thead>
