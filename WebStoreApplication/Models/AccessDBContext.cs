@@ -111,10 +111,10 @@ namespace WebStoreApplication.Models
             string query = @"DELETE FROM [CoroNacessitiesDB].dbo.OrderStatus WHERE OrderStatusID = @OrderStatusID";
             return CoroNacessitiesDBContext.getConnection().Execute(query, new { OrderStatusID = orderStatusID});
         }
-        public OrdersModel GetOrderStatus(int orderStatusID)
+        public OrderStatusModel GetOrderStatus(int orderStatusID)
         {
             string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.OrderStatus WHERE OrderStatusID = @OrderStatusID";
-            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<OrdersModel>(query, new { OrderStatusID = orderStatusID });
+            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<OrderStatusModel>(query, new { OrderStatusID = orderStatusID });
         }
         public int UpdateOrderStatus(int orderStatusID, OrderStatusModel orderStatus)
         {
