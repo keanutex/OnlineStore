@@ -13,8 +13,8 @@ namespace WebStoreApplication.Models
         public string GetUserPassword(string username);
         public int AddUser(RegisterModel user);
         public int UpdateAddress(AddressModel address);
-        public UserModel GetUser(int userID);
-        public int UpdateUser(int userID ,UserModel user);
+        //public UserModel GetUser(int userID);
+        //public int UpdateUser(int userID ,UserModel user);
 
         // Order Items
         public int AddOrderItems(int orderItemID, OrderItemModel orderItem);
