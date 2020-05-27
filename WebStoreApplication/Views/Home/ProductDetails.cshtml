@@ -1,0 +1,55 @@
+﻿@using System.IO;
+@using System.Net;
+@using Newtonsoft.Json;
+@using Newtonsoft.Json.Linq;
+@using WebStoreApplication.Global;
+
+@{
+    ViewData["Title"] = "ProductDetails";
+
+
+    //String result = Global.Get("http://localhost:5000/products/1");
+
+    //ProductModel products = JsonConvert.DeserializeObject<ProductModel>(result);
+
+
+}
+
+<h1>Product Details</h1>
+
+<h1 style="text-align: center;">PRODUCT NAME</h1>
+<h1 style="text-align: center;"><img src="blobgoeshere" target="_blank" class="img-fluid" style="font-size: 1rem; text-align: left;"></h1>
+<p style="text-align: left;" id="price">
+    <b>
+        PRICE:
+</p>
+<br>
+<br>
+<p style="text-align: left;" id="type">
+    <b>
+        TYPE:
+</p>
+<br>
+<br>
+<p style="text-align: left;">
+    <b>
+        ETC:
+</p>
+    </b>
+
+
+@section Scripts{
+    <script>
+        var id = localStorage.getItem("productSelected");
+        $(document).ready(function () {
+            $.get("http://localhost:5000/products/" + id, function (data) {
+                // Only here you should use the data variable as it is here and only here
+                // that it is assigned
+                document.getElementById("price").innerHTML = "Price" + data.price;
+                document.getElementById("type").innerHTML = "Type" + type.price;
+
+            })
+        });
+
+    </script>
+}
