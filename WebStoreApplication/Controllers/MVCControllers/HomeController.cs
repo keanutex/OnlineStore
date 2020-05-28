@@ -27,7 +27,8 @@ namespace WebStoreApplication.Controllers
 
         public IActionResult Register()
         {
-            return View();
+            RegisterModel registerModel = new RegisterModel();
+            return View(registerModel);
         }
 
         public IActionResult Login()

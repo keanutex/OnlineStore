@@ -6,8 +6,6 @@ CREATE TABLE CoroNacessitiesDB.dbo.Users(
 [Surname] VARCHAR(50) NOT NULL,
 [Email] VARCHAR(50) NOT NULL,
 [ContactNo] VARCHAR(25) NOT NULL,
-[Rating] INT NOT NULL,
-[PayPalInfo] VARCHAR(50) NOT NULL,
 [AddressID] INT NOT NULL,
 [Password] VARCHAR(50) NOT NULL,
 PRIMARY KEY ([UserID])
