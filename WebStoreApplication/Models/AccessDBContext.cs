@@ -8,8 +8,8 @@ namespace WebStoreApplication.Models
         // Products
         public int AddProduct(ProductModel product)
         {
-            string query = @"INSERT INTO [CoroNacessitiesDB].dbo.Product (UserID, ProductName, ProductDescription, Price, StatusID, TypeID, ProductImage) VALUES (@UserID, @ProductName, @ProductDescription, @Price, @StatusID, @TypeID, @ProductImage)";
-            return CoroNacessitiesDBContext.getConnection().Execute(query, new {ProductName = product.productName, ProductDescription = product.productDescription, Price = product.price, UserID = product.userID, StatusID = product.statusID, TypeID = product.typeID, ProductImage = product.productImage,});
+            string query = @"INSERT INTO [CoroNacessitiesDB].dbo.Product (UserID, ProductName, ProductDescription, Price, ProductStatusID, TypeID, ProductImage) VALUES (@UserID, @ProductName, @ProductDescription, @Price, @ProductStatusID, @TypeID, @ProductImage)";
+            return CoroNacessitiesDBContext.getConnection().Execute(query, new {ProductName = product.productName, ProductDescription = product.productDescription, Price = product.price, UserID = product.userID, ProductStatusID = product.statusID, TypeID = product.typeID, ProductImage = product.productImage,});
         }
         public int RemoveProduct(int productID)
         {
