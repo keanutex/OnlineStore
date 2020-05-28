@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
 
 namespace WebStoreApplication.Controllers
 {
@@ -12,63 +9,77 @@ namespace WebStoreApplication.Controllers
     [ApiController]
     public class AccountController : Controller
     {
-        private UserManager<UserModel> UserMgr { get; }
-        private SignInManager<UserModel> SignInMgr { get; }
-        public AccountController(UserManager<UserModel>userManager,SignInManager<UserModel>signInManager)
-        {
-            UserMgr = userManager;
-            SignInMgr = signInManager;
-        }
+        private readonly IAccessDBContext dbAccessor;
 
+        private readonly Common common = new Common();
+        
+
+        public AccountController(IAccessDBContext dbAccessor)
+        {
+            this.dbAccessor = dbAccessor;
+        }
+      
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginModel login)
+        public ActionResult Login(LoginModel login)
         {
-            var result = await SignInMgr.PasswordSignInAsync(login.Username, login.Password, false, false);
-            if(result.Succeeded)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ViewBag.Result = "result is "+result.ToString();
-                return BadRequest(result);
-            }
-           
-
-
-        }
-
-        [HttpPost("register/{password}")]
-        public async Task<IActionResult> Register(UserModel newUser , string password)
-        {
-           
             try
             {
-                ViewBag.Message = "User already registered";
-                UserModel user = await UserMgr.FindByNameAsync(newUser.UserName);
-               
-                if (user == null)
+                if (common.CreateHashPassword(login.password).Equals(dbAccessor.GetUserPassword(login.username), StringComparison.InvariantCultureIgnoreCase))
                 {
-                    IdentityResult result = await UserMgr.CreateAsync(newUser, password);
-                    ViewBag.Message = "User was created";
-                    if (result.Succeeded == false)
-                    {
-                        return BadRequest(result);
-                    }
-                    else
-                    {
-                        return Ok();
-                    }
-                    
-
+                    UserModel user = dbAccessor.GetUser(login.username);
+                    Session.userId = user.userId;
+                    Session.username = login.username;
+                    return Ok();
+                }
+                else
+                {
+                    return Unauthorized();
                 }
             }
             catch(Exception ex)
             {
-                ViewBag.Message = ex;
                 return BadRequest(ex);
             }
-            return View();
+        
+
         }
+
+        [HttpPost("register")]
+        public IActionResult Register(RegisterModel newUser )
+        {
+
+            try
+            {
+                UserModel user = dbAccessor.GetUser(newUser.username);
+
+                if (user == null)
+                {
+                    newUser.password = common.CreateHashPassword(newUser.password);
+                    if (dbAccessor.AddUser(newUser) == 1)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return BadRequest("Username already exists");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+         
+         
+            
+
+        }
+
+        
     }
 }

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS dbo.Users;
 CREATE TABLE CoroNacessitiesDB.dbo.Users(
 [UserID] INT IDENTITY(1,1) NOT NULL,
 [Username] VARCHAR(50) NOT NULL,
@@ -8,5 +9,6 @@ CREATE TABLE CoroNacessitiesDB.dbo.Users(
 [Rating] INT NOT NULL,
 [PayPalInfo] VARCHAR(50) NOT NULL,
 [AddressID] INT NOT NULL,
+[Password] VARCHAR(50) NOT NULL,
 PRIMARY KEY ([UserID])
 );

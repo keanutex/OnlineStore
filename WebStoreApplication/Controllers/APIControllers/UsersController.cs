@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
 
 namespace WebStoreApplication.Controllers
 {
@@ -12,18 +10,29 @@ namespace WebStoreApplication.Controllers
     public class UsersController : Controller
     {
         private readonly IAccessDBContext dbAccessor;
+        private readonly Common common = new Common();
 
         public UsersController(IAccessDBContext dbAccessor)
         {
             this.dbAccessor = dbAccessor;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
+        [HttpGet("{username}")]
+        public IActionResult GetUser(string username)
         {
             try
             {
-                return Ok(dbAccessor.GetUser(id));
+                UserModel user = dbAccessor.GetUser(username);
+
+                if (user== null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(dbAccessor.GetUser(username));
+                }
+               
             }
             catch(Exception ex)
             {
@@ -32,10 +41,11 @@ namespace WebStoreApplication.Controllers
             
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdateUser(int id , UserModel user)
+        [HttpPut("")]
+        public IActionResult UpdateUser(UserModel user)
         {
-            if (dbAccessor.UpdateUser(id , user) == 1)
+            user.password = common.CreateHashPassword(user.password);
+            if (dbAccessor.UpdateUser(user) == 1)
             {
                 return Ok();
             }
@@ -45,7 +55,20 @@ namespace WebStoreApplication.Controllers
             }
         }
 
-       
+        [HttpPut("address")]
+        public IActionResult UpdateAddress(AddressModel address)
+        {
+           
+            if (dbAccessor.UpdateAddress( address) == 1)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
 
     }
 }

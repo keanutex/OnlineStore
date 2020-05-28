@@ -1,17 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Migrations\20200522065353_CreateIdentitySchema.cs" />
-    <Compile Remove="Migrations\20200522065353_CreateIdentitySchema.Designer.cs" />
-    <Compile Remove="Migrations\20200522075115_CreateIdentitySchema.cs" />
-    <Compile Remove="Migrations\20200522075115_CreateIdentitySchema.Designer.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Data\Products.json" />
@@ -55,10 +48,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Account\" />
   </ItemGroup>
 
 </Project>

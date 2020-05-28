@@ -19,16 +19,9 @@
     String result = Global.Get("http://localhost:5000/products/all");
 
     List<ProductModel> products = JsonConvert.DeserializeObject<List<ProductModel>>(result);
-
-
-
-
 }
 
-
 <h1>Products</h1>
-
-
 
 <table class="table" id="productsTable">
     <thead>
@@ -47,7 +40,7 @@
                     <td>@product.productName</td>
                     <td>@product.productDescription</td>
                     <td>R @product.price</td>
-                    <td><a href="urlForProduct">View</a></td>
+                    <td><a href="https://localhost:5001/Home/ProductDetails" onclick="storeProductClicked(@product.productID)">View</a></td>
                 </tr>
             }
         }
@@ -66,6 +59,10 @@
             });
             $('.dataTables_length').addClass('bs-select');
         });
+
+        function storeProductClicked(productId) {
+            localStorage.setItem("productSelected", productId);
+        }
     </script>
 }
 

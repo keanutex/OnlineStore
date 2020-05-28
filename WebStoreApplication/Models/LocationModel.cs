@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 
 namespace WebStoreApplication.Models
 {
-   
-    public class LoginModel
+    public class LocationModel
     {
+        public int userID { get; set; }
         public string username { get; set; }
-        public string password { get; set; }
-        public LoginModel()
+        public string longitude { get; set; }
+        public string latitude { get; set; }
+
+        public LocationModel()
         {
 
         }
-
     }
 }
