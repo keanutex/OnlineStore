@@ -64,10 +64,15 @@ namespace WebStoreApplication.Models
         }
 
         //User Details
-        public UserModel GetUser(string username)
+        public UserModel GetUserByUsername(string username)
         {
             string query = @"SELECT * FROM [dbo].[Users] where Username=@Username;";
             return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<UserModel>(query,new{ Username = username });
+        }
+        public UserModel GetUserById(int userId)
+        {
+            string query = @"SELECT * FROM [dbo].[Users] where UserID=@UserID;";
+            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<UserModel>(query, new { UserID = userId });
         }
 
         public int UpdateUser(UserModel user)
