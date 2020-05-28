@@ -22,5 +22,11 @@ namespace WebStoreApplication.Controllers.APIControllers
         {
             return Ok(dbAccessor.GetLocation(userId));
         }
+
+        [HttpGet("city")]
+        public IActionResult GetAllCities()
+        {
+            return Ok(dbAccessor.GetAllCities());
+        }
     }
 }
