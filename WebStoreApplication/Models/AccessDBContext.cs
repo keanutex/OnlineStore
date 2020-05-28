@@ -32,6 +32,7 @@ namespace WebStoreApplication.Models
             return CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query).AsList();
         }
 
+        //User Details
         public UserModel GetUser(string username)
         {
             string query = @"SELECT * FROM [dbo].[Users] where Username=@Username;";
@@ -65,6 +66,12 @@ namespace WebStoreApplication.Models
 
         }
 
+        //Location Details
+        public LocationModel GetLocation(string username)
+        {
+            string query = @"SELECT * FROM [dbo].[LocationView] where Username=@Username;";
+            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<LocationModel>(query, new { Username = username });
+        }
 
         // Order Items
         public int AddOrderItems(int orderItemID, OrderItemModel orderItem)

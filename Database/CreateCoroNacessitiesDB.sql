@@ -55,7 +55,11 @@ print '---------created all tables---------'
 
 GO
 
+:r $(path)/CreateLocationView.sql
 
+print '---------Views created---------'
+
+GO
 :r $(path)/InsertDataScript.sql
 
 print '---------Inserts Done---------'
