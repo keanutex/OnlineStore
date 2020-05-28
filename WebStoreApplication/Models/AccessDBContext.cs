@@ -63,6 +63,15 @@ namespace WebStoreApplication.Models
             return CoroNacessitiesDBContext.getConnection().Query<TypeModel>(query).AsList();
         }
 
+        public int AddProductToCart(int userID, int orderStatusID, int productID, int noOfProducts)
+        {
+            string queryOrder = @"INSERT INTO [CoroNacessitiesDB].dbo.Orders (UserID, OrderStatusID) VALUES (@UserID, @OrderStatusID) SELECT SCOPE_IDENTITY() ;";
+            int orderID = CoroNacessitiesDBContext.getConnection().ExecuteScalar<int>(queryOrder, new { UserId = userID, OrderStatusID = orderStatusID});
+
+            string queryOrderItem = @"INSERT INTO [CoroNacessitiesDB].dbo.OrderItem (OrderID, ProductID, NoOfProducts) VALUES (@OrderID, @ProductID, @NoOfProducts)";
+            return CoroNacessitiesDBContext.getConnection().Execute(queryOrderItem, new { OrderID = orderID, ProductID = productID, NoOfProducts = noOfProducts});
+        }
+
         //User Details
         public UserModel GetUserByUsername(string username)
         {
@@ -123,10 +132,10 @@ namespace WebStoreApplication.Models
         }
 
         // Order Items
-        public int AddOrderItems(int orderItemID, OrderItemModel orderItem)
+        public int AddOrderItems(OrderItemModel orderItem)
         {
-            string query = @"INSERT INTO [CoroNacessitiesDB].dbo.OrderItem (OrderItemID, OrderID, ProductID, NoOfProducts) VALUES (@OrderItemID, @OrderID, @ProductID, @NoOfProducts)";
-            return CoroNacessitiesDBContext.getConnection().Execute(query, new { OrderItemID = orderItem.orderItemID, OrderID = orderItem.orderID, ProductID = orderItem.productID, NoOfProducts = orderItem.noOfProducts});
+            string query = @"INSERT INTO [CoroNacessitiesDB].dbo.OrderItem (OrderID, ProductID, NoOfProducts) VALUES (@OrderID, @ProductID, @NoOfProducts)";
+            return CoroNacessitiesDBContext.getConnection().Execute(query, new { OrderID = orderItem.orderID, ProductID = orderItem.productID, NoOfProducts = orderItem.noOfProducts});
         }
         public int RemoveOrderItems(int orderItemID)
         {
@@ -149,12 +158,11 @@ namespace WebStoreApplication.Models
             return CoroNacessitiesDBContext.getConnection().Query<OrderItemModel>(query, new { OrderID = orderID }).AsList();
         }
 
-
         // Orders
         public int AddOrder(OrdersModel order)
         {
-            string query = @"INSERT INTO [CoroNacessitiesDB].dbo.Orders (OrderID, UserID, OrderStatusID) VALUES (@OrderID, @UserID, @OrderStatusID)";
-            return CoroNacessitiesDBContext.getConnection().Execute(query, new { OrderID = order.orderID, UserID = order.userID, OrderStatusID = order.orderStatusID});
+            string query = @"INSERT INTO [CoroNacessitiesDB].dbo.Orders (UserID, OrderStatusID) VALUES (@UserID, @OrderStatusID); SELECT Orders.OrderID FROM [CoroNacessitiesDB].dbo.Orders WHERE Orders.UserID = @UserId AND Orders.OrderStatusID = @OrderStatusID SELECT SCOPE_IDENTITY()";
+            return CoroNacessitiesDBContext.getConnection().Execute(query, new { UserID = order.userID, OrderStatusID = order.orderStatusID});
         }
         public int RemoveOrder(int orderID)
         {
@@ -196,7 +204,7 @@ namespace WebStoreApplication.Models
         public int AddOrderStatus(OrderStatusModel orderStatus)
         {
             string query = @"INSERT INTO [CoroNacessitiesDB].dbo.OrderStatus (OrderStatusID, OrderStatusDescription) VALUES (@OrderStatusID, @OrderStatusDescription)";
-            return CoroNacessitiesDBContext.getConnection().Execute(query, new { OrderStatusID = orderStatus.orderStatusID, OrderStatusDescription = orderStatus.orderStatusDescription});
+            return CoroNacessitiesDBContext.getConnection().ExecuteScalar<int>(query, new { OrderStatusID = orderStatus.orderStatusID, OrderStatusDescription = orderStatus.orderStatusDescription});
         }
         public int RemoveOrderStatus(int orderStatusID)
         {

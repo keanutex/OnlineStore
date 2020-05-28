@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
 
 namespace WebStoreApplication.Controllers
 {
@@ -78,6 +79,15 @@ namespace WebStoreApplication.Controllers
         public IActionResult GetAllProductTypes()
         {
             return Ok(dbAccessor.GetAllProductTypes());
+        }
+
+        [HttpGet("addToCart/{productId}")]
+        public IActionResult AddProductToCart(int productId) {
+            if (Session.username == null) {
+                return Redirect("https://localhost:5001/Home/Login");
+            }
+            dbAccessor.AddProductToCart(Session.userId, 3, productId, 1);
+            return Redirect("https://localhost:5001/");
         }
     }
 }

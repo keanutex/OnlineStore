@@ -3,6 +3,7 @@
 @using Newtonsoft.Json;
 @using Newtonsoft.Json.Linq;
 @using WebStoreApplication.Global;
+@using WebStoreApplication.Shared;
 
 @{
     ViewData["Title"] = "ProductDetails";
@@ -18,15 +19,18 @@
     <li class="list-group-item" id="type">Third item</li>
 </ul>
 <br />
-<button type="button" class="btn btn-primary" onclick="">Add to Cart</button>
+<button type="button" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
 
 <button type="button" class="btn btn-primary" onclick="viewUser()">View User</button>
     
-
-
 @section Scripts{
     <script>
         var id = localStorage.getItem("productSelected");
+
+        function addToCart(username) {
+            window.location.href = "http://localhost:5000/products/addToCart/" + id;
+        }
+        
         $(document).ready(function () {
             $.get("http://localhost:5000/products/" + id, function (data) {
                 document.getElementById("productName").innerHTML = data.productName;
