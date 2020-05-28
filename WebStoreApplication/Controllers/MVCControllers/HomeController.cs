@@ -43,7 +43,8 @@ namespace WebStoreApplication.Controllers
 
         public IActionResult Login()
         {
-            return View();
+            LoginModel loginModel = new LoginModel();
+            return View(loginModel);
         }
 
         public IActionResult Logout()
