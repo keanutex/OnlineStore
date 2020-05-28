@@ -3,11 +3,13 @@ namespace WebStoreApplication.Models
 {
     public interface IAccessDBContext
     {
+        // Products
         public int AddProduct(ProductModel product);
         public int RemoveProduct(int productID);
         public ProductModel GetProduct(int productID);
         public int UpdateProduct(int id, ProductModel product); 
         public List<ProductModel> GetAllProducts();
+        public List<ProductModel> GetAllUserProducts(int userID);
 
         //User Details
         public UserModel GetUser(string username);

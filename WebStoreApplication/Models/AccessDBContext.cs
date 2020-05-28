@@ -5,6 +5,7 @@ namespace WebStoreApplication.Models
 {
     public class AccessDBContext: IAccessDBContext
     {
+        // Products
         public int AddProduct(ProductModel product)
         {
             string query = @"INSERT INTO [CoroNacessitiesDB].dbo.Product (UserID, ProductName, ProductDescription, Price, StatusID, TypeID, ProductImage) VALUES (@UserID, @ProductName, @ProductDescription, @Price, @StatusID, @TypeID, @ProductImage)";
@@ -30,6 +31,11 @@ namespace WebStoreApplication.Models
         {
             string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.Product";
             return CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query).AsList();
+        }
+        public List<ProductModel> GetAllUserProducts(int userID)
+        {
+            string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.Product AS p WHERE p.UserID = @UserID";
+            return CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query, new {UserID = userID}).AsList();
         }
 
         //User Details

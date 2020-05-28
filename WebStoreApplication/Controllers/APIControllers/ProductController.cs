@@ -40,6 +40,12 @@ namespace WebStoreApplication.Controllers
             return Ok(dbAccessor.GetAllProducts());
         }
 
+        [HttpGet("all/user/{id}")]
+        public IActionResult GetAllUserProducts(int id)
+        {
+            return Ok(dbAccessor.GetAllUserProducts(id));
+        }
+
         
         [HttpDelete("{id}")]
         public IActionResult RemoveProduct(int id)
