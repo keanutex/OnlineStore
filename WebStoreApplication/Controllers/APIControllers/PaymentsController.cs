@@ -14,25 +14,46 @@ namespace WebStoreApplication.Controllers
             this.payPalAccessor = payPalAccessor;
         }
 
-        [HttpGet("")]
+        [HttpPost("")]
         public IActionResult GetToken()
         {
-            payPalAccessor.getToken();
-            return Ok();
+            var token = payPalAccessor.GetToken();
+            if (token.Result != null)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
-        [HttpGet("{total}")]
+        [HttpPost("create-payment/{total}/")]
         public IActionResult CreatePayment(string total)
         {
-            var url = payPalAccessor.createPayment(total);
-            return Ok(new {approval_url = url.Result});
+            var url = payPalAccessor.CreatePayment(total);
+            if (url != null)
+            {
+                return Ok(new {approval_url = url.Result});
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
-        [HttpGet("execute/{payerid}/")]
+        [HttpPost("execute/{payerid}/")]
         public IActionResult ExecutePayment(string payerid)
         {
-            payPalAccessor.ExecutePayment(payerid);
-            return Ok();
+            var result = payPalAccessor.ExecutePayment(payerid);
+            if (result != null)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();   
+            }
         }
     }
 }

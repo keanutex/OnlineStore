@@ -3,8 +3,8 @@ namespace WebStoreApplication.Models
 {
     public interface IAccessPayPalAPI
     {
-        public Task<string> getToken();
-        public Task<string> createPayment(string total);
-        public void ExecutePayment(string payerid);
+        public Task<string> GetToken();
+        public Task<string> CreatePayment(string total);
+        public Task<string> ExecutePayment(string payerid);
     }    
 }

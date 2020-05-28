@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 namespace WebStoreApplication.Models
 {
     public class PaymentCreationRequest
