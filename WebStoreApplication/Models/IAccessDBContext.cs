@@ -12,6 +12,8 @@ namespace WebStoreApplication.Models
         public List<ProductModel> GetAllUserProducts(int userID);
         public List<TypeModel> GetAllProductTypes();
 
+        public int AddProductToCart(int userID, int orderStatusID, int productID, int noOfProducts);
+
         //User Details
         public UserModel GetUser(string username);
         public int UpdateUser(UserModel user);
@@ -25,7 +27,7 @@ namespace WebStoreApplication.Models
         public AddressModel GetAddress(int addressID);
       
         // Order Items
-        public int AddOrderItems(int orderItemID, OrderItemModel orderItem);
+        public int AddOrderItems(OrderItemModel orderItem);
         public int RemoveOrderItems(int orderItemID);
         public OrderItemModel GetOrderItems(int orderItemID);
         public int UpdateOrderItems(int orderItemID, OrderItemModel orderItem);

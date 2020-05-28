@@ -15,9 +15,9 @@ namespace WebStoreApplication.Controllers.APIControllers
         }
 
         [HttpPost("")]
-        public IActionResult AddOrderItems(int orderItemID, OrderItemModel orderItem)
+        public IActionResult AddOrderItems(OrderItemModel orderItem)
         {
-            if (dbAccessor.AddOrderItems(orderItemID, orderItem) == 1)
+            if (dbAccessor.AddOrderItems(orderItem) == 1)
             {
                 return Ok();
             }
