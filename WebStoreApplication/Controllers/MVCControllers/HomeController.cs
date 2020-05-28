@@ -56,6 +56,13 @@ namespace WebStoreApplication.Controllers
             return View();
         }
 
+        public IActionResult Admin()
+        {
+            if(Session.username != "Keanu")
+                return View("Products");
+            return View();
+        }
+
         public IActionResult Cart()
         {
             if (Session.username == null) {

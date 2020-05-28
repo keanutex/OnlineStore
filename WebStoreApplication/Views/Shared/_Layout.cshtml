@@ -51,6 +51,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AddProduct">Add Product</a>
                         </li>
+                        @if(username== "Keanu")
+                        {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin">Super Secret Admin</a>
+                    </li>
+                        }
                     </ul>
                 </div>
             </div>
