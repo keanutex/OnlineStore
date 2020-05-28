@@ -7,8 +7,8 @@ namespace WebStoreApplication.Shared
 {
     public static class Session
     {
+        public static int userId { get; set; }
         public static string username { get; set; } = null;
-
 
     }
 }

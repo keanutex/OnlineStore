@@ -26,6 +26,8 @@ namespace WebStoreApplication.Controllers
             {
                 if (common.CreateHashPassword(login.password).Equals(dbAccessor.GetUserPassword(login.username), StringComparison.InvariantCultureIgnoreCase))
                 {
+                    UserModel user = dbAccessor.GetUser(login.username);
+                    Session.userId = user.userId;
                     Session.username = login.username;
                     return Ok();
                 }
