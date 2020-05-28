@@ -67,10 +67,10 @@ namespace WebStoreApplication.Models
         }
 
         //Location Details
-        public LocationModel GetLocation(string username)
+        public LocationModel GetLocation(int userId)
         {
-            string query = @"SELECT * FROM [dbo].[LocationView] where Username=@Username;";
-            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<LocationModel>(query, new { Username = username });
+            string query = @"SELECT * FROM [dbo].[LocationView] where UserID=@UserID;";
+            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<LocationModel>(query, new { UserID = userId });
         }
 
         // Order Items

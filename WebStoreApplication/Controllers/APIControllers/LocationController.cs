@@ -17,10 +17,10 @@ namespace WebStoreApplication.Controllers.APIControllers
         {
             this.dbAccessor = dbAccessor;
         }
-        [HttpGet("{username}")]
-        public IActionResult GetLocation(string username)
+        [HttpGet("{userId}")]
+        public IActionResult GetLocation(int userId)
         {
-            return Ok(dbAccessor.GetLocation(username));
+            return Ok(dbAccessor.GetLocation(userId));
         }
     }
 }
