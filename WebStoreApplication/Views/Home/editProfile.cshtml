@@ -1,118 +1,133 @@
 @model WebStoreApplication.Models.RegisterModel;
 @using Newtonsoft.Json;
 @using WebStoreApplication.Global;
+@using WebStoreApplication.Shared;
+
 
 @{
+
+    int userId = Session.userId;
+    String username = Session.username;
+
     ViewData["Title"] = "Register";
     String result = Global.Get("http://localhost:5000/location/city");
     List<CityModel> cities = JsonConvert.DeserializeObject<List<CityModel>>(result);
+
+    result = Global.Get("http://localhost:5000/products/all/user/" + userId);
+    List<ProductModel> products = JsonConvert.DeserializeObject<List<ProductModel>>(result);
+
+    result = Global.Get("http://localhost:5000/user/" + username);
+    UserModel user = JsonConvert.DeserializeObject<UserModel>(result);
 }
 
-
-<form>
-    <div class="container">
-        <h1>My Profile</h1>
-    </div>
-    <hr>
-    <h2>Personal Details</h2>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Username</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Username">
+    <form>
+        <div class="container">
+            <h1>My Profile</h1>
         </div>
-    </div>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">First Name</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="First Name">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Surname</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Surname">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Email Address</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Email Address">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Contacnt Number</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Contacnt Number">
-        </div>
-    </div>
-
-    <hr />
-
-    <h2>Security Details</h2>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="colFormLabel" placeholder="Password">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Confirm Password</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="colFormLabel" placeholder="Confirm Password">
-        </div>
-    </div>
-
-    <h2>Adress Details</h2>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Street Number</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Street Number">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Street Name</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Street Name">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Complex Name</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Complex Name">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Unit Number</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Unit Number">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">Suburb</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="colFormLabel" placeholder="Suburb">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="colFormLabel" class="col-sm-2 col-form-label">City</label>
-        <div class="col-sm-10">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @{
-                        foreach (CityModel city in cities)
-                        {
-                            <a class="dropdown-item" href="#">@city.cityName</a>
-                        }
-                    }
-                </div>
+        <hr>
+        <h2>Personal Details</h2>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control" id="colFormLabel" value="@user.username">
             </div>
         </div>
-    </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control" id="colFormLabel" value="@user.name">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Surname</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control" id="colFormLabel" value="@user.surname">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Email Address</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control" id="colFormLabel" value="@user.email">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Contacnt Number</label>
+            <div class="col-sm-10">
+                <input type="text" readonly class="form-control" id="colFormLabel" placeholder="@user.contactNo">
+            </div>
+        </div>
 
-    <button type="button" class="btn btn-secondary btn-lg btn-block">Update</button>
-    <button type="button" class="btn btn-danger btn-lg btn-block" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");">Cancel</button>
+        <hr />
 
-</form>
+
+
+        <h1>Products</h1>
+        <br />
+        <table class="table" id="productsTable">
+            <thead>
+                <tr>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (ProductModel product in products)
+                    {
+                        <tr>
+                            <td>@product.productName</td>
+                            <td>@product.productDescription</td>
+                            <td>@product.typeModel.typeName</td>
+                            <td>R @product.price</td>
+                            <td><a href="https://localhost:5001/Home/ProductDetails" onclick="storeProductClicked(@product.productID)">View</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <br />
+        <div id="googleMap" style="width:100%;height:400px;"></div>
+
+        @section Scripts{
+            <script>
+                $(document).ready(function () {
+                    $('#productsTable').DataTable({
+                        "aaSorting": [],
+                        columnDefs: [{
+                            orderable: false,
+                            targets: 3
+                        }]
+                    });
+                    $('.dataTables_length').addClass('bs-select');
+
+                    var id = @userId;
+                    $.get("http://localhost:5000/user/id/" + id, function (data) {
+                        username = data.name;
+                        $.get("http://localhost:5000/location/" + username, function (data) {
+                            lat = data.latitude;
+                            long = data.longitude;
+                            var mapProp = {
+                                center: new google.maps.LatLng(lat, long),
+                                zoom: 10,
+                            };
+                            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                        })
+                    })
+                });
+
+                function storeProductClicked(productId) {
+                    localStorage.setItem("productSelected", productId);
+                }
+
+
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQX3wFfeEOeD1lq_b3h1rcB4wUMU4cCC8&callback=myMap"></script>
+        }
+
+        <button type="button" class="btn btn-danger btn-lg btn-block" onclick="@("window.location.href='" + @Url.Action("Products", "Home") + "'");">Back</button>
+
+    </form>
