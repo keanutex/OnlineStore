@@ -1,44 +1,107 @@
 ﻿
 @{
-    ViewData["Title"] = "ViewProfile";
+    ViewData["Title"] = "viewProfile";
 }
 
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="C:\Users\liebenbergd03\Downloads\RegisterEditProfile.css" />
-</head>
 
-<body class="form" id="login">
-    <h1>View Profile</h1>
-    <h3>Personal details</h3>
-    <div id="container">
-        <div id="fields">
-            <form class="login-form">
-                <input type="text" readonly placeholder="Username" />
-                <input type="text" readonly placeholder="First Name">
-                <input type="text" readonly placeholder="Surname" />
-                <input type="text" readonly placeholder="email" />
-                <input type="text" readonly placeholder="Contact Number" />
-            </form>
-        </div>
-        <div id="inputs">
-            <form class="login-form">
-                <input type="text" />
-                <input type="text">
-                <input type="text" />
-                <input type="text" />
-                <input type="text" />
-            </form>
+<form>
+    <div class="container">
+        <h1>My Profile</h1>
+        <p>Please fill in this form to create an account.</p>
+
+        <p>Already have an account? <a asp-area="" asp-controller="Home" asp-action="Login">Sign in</a>.</p>
+
+    </div>
+    <hr>
+    <h2>Personal Details</h2>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Username" readonly>
         </div>
     </div>
-    <h3>User Location</h3>
-    <div id="map">
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="First Name" readonly>
+        </div>
     </div>
-    <button id="LoginButton">Back</button>
-</body>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Surname</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Surname" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Email Address</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Email Address" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Contacnt Number</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Contacnt Number" readonly>
+        </div>
+    </div>
 
+    <hr />
 
+    <div id="googleMap" style="width:100%;height:400px;"></div>
 
+    <hr />
 
+    <h2>Adress Details</h2>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Street Number</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Street Number" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Street Name</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Street Name" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Complex Name</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Complex Name" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Unit Number</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Unit Number" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Suburb</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Suburb" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">City</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="City">
+        </div>
+    </div>
 
+    <button type="button" class="btn btn-secondary btn-lg btn-block">Update</button>
+    <button type="button" class="btn btn-danger btn-lg btn-block" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");">Cancel</button>
 
+</form>
+
+<script>
+    function myMap() {
+        var mapProp = {
+            center: new google.maps.LatLng(51.508742, -0.120850),
+            zoom: 5,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMgp8KNu--8z1l3FwX8A_veESiSxPmyIo&callback=initMap"></script>
