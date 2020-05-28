@@ -13,14 +13,13 @@ namespace WebStoreApplication.Controllers
 
         private readonly Common common = new Common();
         
-
         public AccountController(IAccessDBContext dbAccessor)
         {
             this.dbAccessor = dbAccessor;
         }
       
         [HttpPost("login")]
-        public ActionResult Login(LoginModel login)
+        public IActionResult Login([FromForm] LoginModel login)
         {
             try
             {
@@ -29,25 +28,30 @@ namespace WebStoreApplication.Controllers
                     UserModel user = dbAccessor.GetUser(login.username);
                     Session.userId = user.userId;
                     Session.username = login.username;
-                    return Ok();
+                    return Redirect("https://localhost:5001/");
                 }
                 else
                 {
-                    return Unauthorized();
+                    return Redirect("https://localhost:5001/Home/Login");
                 }
             }
             catch(Exception ex)
             {
-                return BadRequest(ex);
+                return Redirect("https://localhost:5001/Home/Login");
             }
-        
+        }
 
+        [HttpGet("logout")]
+        public IActionResult Logout()
+        {
+            Session.userId = 0;
+            Session.username = null;
+            return Redirect("https://localhost:5001/");
         }
 
         [HttpPost("register")]
         public IActionResult Register(RegisterModel newUser )
         {
-
             try
             {
                 UserModel user = dbAccessor.GetUser(newUser.username);
@@ -74,12 +78,6 @@ namespace WebStoreApplication.Controllers
             {
                 return BadRequest(ex);
             }
-         
-         
-            
-
         }
-
-        
     }
 }

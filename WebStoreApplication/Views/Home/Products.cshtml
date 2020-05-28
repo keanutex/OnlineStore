@@ -4,15 +4,6 @@
 @{
     ViewData["Title"] = "Products";
 
-    /*ProductModel test = new ProductModel();
-    test.productName = "test";
-    test.productDescription = "passed the test";
-    test.productID = 1;
-    test.price = 2;
-    test.userID = 3;
-    string json = JsonConvert.SerializeObject(test);
-    String test1 = Global.Post("http://localhost:5000/products/", json, "application/json", "PUT");*/
-
     String result = Global.Get("http://localhost:5000/products/all");
 
     List<ProductModel> products = JsonConvert.DeserializeObject<List<ProductModel>>(result);

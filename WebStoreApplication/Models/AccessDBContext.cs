@@ -53,8 +53,8 @@ namespace WebStoreApplication.Models
 
         public int UpdateUser(UserModel user)
         {
-            string query = @"UPDATE [CoroNacessitiesDB].dbo.Users SET Password=@Password Name = @Name, Surname=@Surname , Email=@Email ,PhoneNumber= @PhoneNumber, Rating=@Rating ,PayPalInfo = @PayPalInfo WHERE Username = @Username";
-            return CoroNacessitiesDBContext.getConnection().Execute(query, new {Username=user.username, Password = user.password, Name=user.name , Surname = user.surname , Email = user.email , ContactNo = user.contactNo , Rating = user.rating , PayPalInfo = user.payPalInfo });
+            string query = @"UPDATE [CoroNacessitiesDB].dbo.Users SET Password=@Password , Name = @Name, Surname=@Surname , Email=@Email ,ContactNo= @ContactNo, Rating=@Rating ,PayPalInfo = @PayPalInfo WHERE UserID = @UserID";
+            return CoroNacessitiesDBContext.getConnection().Execute(query, new {UserID=user.userId, Password = user.password, Name=user.name , Surname = user.surname , Email = user.email , ContactNo = user.contactNo , Rating = user.rating , PayPalInfo = user.payPalInfo });
    
          }
         public int AddUser(RegisterModel user)
@@ -83,6 +83,12 @@ namespace WebStoreApplication.Models
         {
             string query = @"SELECT * FROM [dbo].[LocationView] where UserID=@UserID;";
             return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<LocationModel>(query, new { UserID = userId });
+        }
+
+        public List<CityModel> GetAllCities()
+        {
+            string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.City";
+            return CoroNacessitiesDBContext.getConnection().Query<CityModel>(query).AsList();
         }
 
         // Order Items
@@ -138,6 +144,20 @@ namespace WebStoreApplication.Models
         {
             string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.Orders WHERE UserID = @UserID";
             return CoroNacessitiesDBContext.getConnection().Query<OrdersModel>(query, new { UserID = userID }).AsList();
+        }
+
+        public List<ProductModel> GetAllProductsInOrder(int userID, string statusDescription)
+        {
+            string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.Product
+                                INNER JOIN OrderItem
+                                ON Product.productId=OrderItem.ProductID
+                                INNER JOIN Orders
+                                ON OrderItem.OrderID=Orders.OrderID
+                                INNER JOIN OrderStatus
+                                ON Orders.OrderStatusID=OrderStatus.OrderStatusID
+                                WHERE Orders.UserID = @UserID
+                                AND OrderStatus.OrderStatusDescription = @StatusDescription";
+            return CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query, new { UserID = userID, statusDescription = statusDescription}).AsList();
         }
 
 

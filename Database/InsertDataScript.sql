@@ -102,7 +102,7 @@ INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (1, 1, 2)
 GO
 INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (2, 1, 2)
 GO
-INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (3, 2, 4)
+INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (3, 2, 3)
 GO
 INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (4, 3, 5)
 GO
