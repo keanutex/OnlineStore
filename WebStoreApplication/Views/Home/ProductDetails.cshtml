@@ -19,6 +19,8 @@
 </ul>
 <br />
 <button type="button" class="btn btn-primary" onclick="">Add to Cart</button>
+
+<button type="button" class="btn btn-primary" onclick="viewUser()">View User</button>
     
 
 
@@ -31,8 +33,13 @@
                 document.getElementById("price").innerHTML = ("Price: " + data.price).bold();
                 document.getElementById("description").innerHTML = ("Description: " + data.productDescription).bold();
                 document.getElementById("type").innerHTML = ("Category: " + data.typeModel.typeName).bold();
+                localStorage.setItem("userSelected", data.userID);
             })
         });
+
+        function viewUser() {
+            window.location.href = "https://localhost:5001/Home/viewProfile";
+        }
 
     </script>
 }
