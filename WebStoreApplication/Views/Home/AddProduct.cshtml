@@ -8,8 +8,8 @@
     int userId = Session.userId;
 
     String result = Global.Get("https://localhost:5001/products/all/product-types");
-
     List<TypeModel> types = JsonConvert.DeserializeObject<List<TypeModel>>(result);
+
 }
 
 <h1>Add Product</h1>
@@ -134,20 +134,17 @@
                         productName: productName,
                         userID: 1,
                         statusID : 1,
-                        productImage: image
+                        productImage: ""
                     }
+
                 $.ajax({
-                    type: 'POST',
+                    type: "POST",
                     url: 'https://localhost:5000/products/',
-                    contentType: 'application/json',
-                    data: JSON.stringify(data), // access in body
-                }).done(function () {
-                    console.log('SUCCESS');
-                }).fail(function (msg) {
-                    console.log('FAIL');
-                    console.log(data.productImage);
-                }).always(function (msg) {
-                    console.log('ALWAYS');
+                    data: data,
+                    dataType: "json",
+                    success: function (resultData) {
+                        alert("Save Complete");
+                    }
                 });
             }
 
