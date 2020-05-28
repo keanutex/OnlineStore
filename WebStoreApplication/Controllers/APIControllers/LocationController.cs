@@ -17,10 +17,10 @@ namespace WebStoreApplication.Controllers.APIControllers
         {
             this.dbAccessor = dbAccessor;
         }
-        [HttpGet("{userId}")]
-        public IActionResult GetLocation(int userId)
+        [HttpGet("{username}")]
+        public IActionResult GetLocation(string username)
         {
-            return Ok(dbAccessor.GetLocation(userId));
+            return Ok(dbAccessor.GetLocation(username));
         }
 
         [HttpGet("city")]
@@ -28,5 +28,12 @@ namespace WebStoreApplication.Controllers.APIControllers
         {
             return Ok(dbAccessor.GetAllCities());
         }
+
+        [HttpGet("address/{addressId}")]
+        public IActionResult GetAddress(int addressId)
+        {
+            return Ok(dbAccessor.GetAddress(addressId));
+        }
+
     }
 }

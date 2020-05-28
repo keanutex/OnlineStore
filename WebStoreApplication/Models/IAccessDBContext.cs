@@ -20,10 +20,10 @@ namespace WebStoreApplication.Models
         public int UpdateAddress(AddressModel address);
 
         //Location Details
-        public LocationModel GetLocation(int userId);
+        public LocationModel GetLocation(string username);
         public List<CityModel> GetAllCities();
+        public AddressModel GetAddress(int addressID);
       
-
         // Order Items
         public int AddOrderItems(int orderItemID, OrderItemModel orderItem);
         public int RemoveOrderItems(int orderItemID);
