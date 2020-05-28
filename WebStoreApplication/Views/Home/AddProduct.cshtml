@@ -7,7 +7,7 @@
 
     int userId = Session.userId;
 
-    String result = Global.Get("https://localhost:5001/products/all/product-types");
+    String result = Global.Get("http://localhost:5000/products/all/product-types");
     List<TypeModel> types = JsonConvert.DeserializeObject<List<TypeModel>>(result);
 
 }
@@ -135,16 +135,19 @@
                         userID: 1,
                         statusID : 1,
                         productImage: ""
-                    }
+                }
+                var settings = {
+                    "url": "https://localhost:5001/products/",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify(data),
+                };
 
-                $.ajax({
-                    type: "POST",
-                    url: 'https://localhost:5000/products/',
-                    data: data,
-                    dataType: "json",
-                    success: function (resultData) {
-                        alert("Save Complete");
-                    }
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
                 });
             }
 

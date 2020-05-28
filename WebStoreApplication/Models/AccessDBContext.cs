@@ -1,4 +1,5 @@
 using Dapper;
+using Microsoft.AspNetCore.Cors;
 using System.Collections.Generic;
 
 namespace WebStoreApplication.Models
