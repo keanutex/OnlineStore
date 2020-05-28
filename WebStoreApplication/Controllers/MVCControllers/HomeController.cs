@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
 
 namespace WebStoreApplication.Controllers
 {
@@ -42,7 +43,8 @@ namespace WebStoreApplication.Controllers
 
         public IActionResult Login()
         {
-            return View();
+            LoginModel loginModel = new LoginModel();
+            return View(loginModel);
         }
 
         public IActionResult Logout()
@@ -62,6 +64,14 @@ namespace WebStoreApplication.Controllers
 
         public IActionResult ProductDetails()
         {
+            return View();
+        }
+
+        public IActionResult Cart()
+        {
+            if (Session.username == null) {
+                return View("Login");
+            }
             return View();
         }
 

@@ -1,0 +1,46 @@
+@using Newtonsoft.Json
+@using WebStoreApplication.Global
+
+@{
+    ViewData["Title"] = "Cart";
+
+    String result = Global.Get("http://localhost:5000/orders/all");
+    List<ProductModel> products = JsonConvert.DeserializeObject<List<ProductModel>>(result);
+}
+
+<h1>Your Cart</h1>
+
+<table class="table" id="productsTable">
+    <thead>
+        <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Image</th>
+            <th scope="col"># items</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (ProductModel product in products)
+            {
+                <tr>
+                    <td>@product.productName</td>
+                    <td>@product.productDescription</td>
+                    <td>R @product.price</td>
+                    <td>Image</td>
+                    <td>num items</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<button type="button" class="btn btn-primary" onclick="submitAndRedirect()">Check out</button>
+
+@section Scripts{
+    <script>
+        function submitAndRedirect() {
+            window.location.href = "/";
+        }
+    </script>
+}
