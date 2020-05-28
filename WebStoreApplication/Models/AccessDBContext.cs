@@ -47,7 +47,7 @@ namespace WebStoreApplication.Models
          }
         public int AddUser(RegisterModel user)
         {
-            string queryAddress = @"INSERT INTO [CoroNacessitiesDB].dbo.Address (ComplexName, UnitNumber, StreetName, StreetNumber, Suburb, CityID) VALUES (@ComplexName, @UnitNumber, @StreetName, @Suburb, @CityID)";
+            string queryAddress = @"INSERT INTO [CoroNacessitiesDB].dbo.Address (ComplexName, UnitNumber, StreetName, StreetNumber, Suburb, CityID) VALUES (@ComplexName, @UnitNumber, @StreetName,@StreetNumber , @Suburb, @CityID)";
             CoroNacessitiesDBContext.getConnection().Execute(queryAddress, new { ComplexName = user.complexName, UnitNumber = user.unitNumber, StreetName = user.streetName, StreetNumber = user.streetNumber, Suburb = user.suburb, CityID = user.cityID });
 
             string queryUser = @"INSERT INTO [CoroNacessitiesDB].dbo.Users (Username, Password, Name, Surname, Email, ContactNo , Rating , PayPalInfo ,AddressID) VALUES (@Username, @Password, @Name, @Surname, @Email, @ContactNo , @Rating , @PayPalInfo , @AddressID)";

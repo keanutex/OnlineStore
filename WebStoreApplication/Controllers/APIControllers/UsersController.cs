@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
 
 namespace WebStoreApplication.Controllers
 {
@@ -9,7 +10,7 @@ namespace WebStoreApplication.Controllers
     public class UsersController : Controller
     {
         private readonly IAccessDBContext dbAccessor;
-        private readonly Common common;
+        private readonly Common common = new Common();
 
         public UsersController(IAccessDBContext dbAccessor)
         {
@@ -22,6 +23,7 @@ namespace WebStoreApplication.Controllers
             try
             {
                 UserModel user = dbAccessor.GetUser(username);
+
                 if (user== null)
                 {
                     return NotFound();
