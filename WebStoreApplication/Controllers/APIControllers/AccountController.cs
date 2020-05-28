@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
 
 namespace WebStoreApplication.Controllers
 {
@@ -10,44 +11,72 @@ namespace WebStoreApplication.Controllers
     {
         private readonly IAccessDBContext dbAccessor;
 
-        private readonly Common common;
+        private readonly Common common = new Common();
+        
 
         public AccountController(IAccessDBContext dbAccessor)
         {
             this.dbAccessor = dbAccessor;
         }
-
+      
         [HttpPost("login")]
-        public IActionResult Login(LoginModel login)
+        public ActionResult Login(LoginModel login)
         {
-            
-            if(common.CreateHashPassword(login.password).Equals(dbAccessor.GetUserPassword(login.username), StringComparison.InvariantCultureIgnoreCase))
+            try
             {
-                return Ok();
+                if (common.CreateHashPassword(login.password).Equals(dbAccessor.GetUserPassword(login.username), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    UserModel user = dbAccessor.GetUser(login.username);
+                    Session.userId = user.userId;
+                    Session.username = login.username;
+                    return Ok();
+                }
+                else
+                {
+                    return Unauthorized();
+                }
             }
-            else{
-                return Unauthorized();
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
             }
+        
 
         }
 
         [HttpPost("register")]
         public IActionResult Register(RegisterModel newUser )
         {
-          
-            if (dbAccessor.GetUser(newUser.username).userId>0)
+
+            try
             {
-                return BadRequest("Username already exists");
+                UserModel user = dbAccessor.GetUser(newUser.username);
+
+                if (user == null)
+                {
+                    newUser.password = common.CreateHashPassword(newUser.password);
+                    if (dbAccessor.AddUser(newUser) == 1)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return BadRequest("Username already exists");
+                }
+
             }
-            newUser.password = common.CreateHashPassword(newUser.password);
-            if (dbAccessor.AddUser(newUser) == 1)
+            catch (Exception ex)
             {
-                return Ok();
+                return BadRequest(ex);
             }
-            else
-            {
-                return BadRequest();
-            }
+         
+         
+            
 
         }
 
