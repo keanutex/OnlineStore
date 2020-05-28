@@ -52,6 +52,7 @@ namespace WebStoreApplication
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
+            
             app.UseCors("AllowOrigin");
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -84,7 +85,7 @@ namespace WebStoreApplication
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Products}/{id?}");
             });
         }
 
