@@ -65,6 +65,11 @@ namespace WebStoreApplication.Controllers
             return View();
         }
 
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

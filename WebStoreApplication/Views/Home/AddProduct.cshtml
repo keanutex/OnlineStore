@@ -1,0 +1,153 @@
+﻿@using WebStoreApplication.Global;
+@using Newtonsoft.Json;
+@using WebStoreApplication.Shared;
+@{
+    ViewData["Title"] = "AddProduct";
+
+
+    int userId = Session.userId;
+
+    //String result = Global.Get("http://localhost:5000/products/types");
+
+    //List<TypeModel> types = JsonConvert.DeserializeObject<List<TypeModel>>(result);
+}
+
+<h1>Add Product</h1>
+<br>
+<form>
+    <div class="row">
+        <div class="col">
+            <label for="productName">Product Name</label>
+            <input type="text" class="form-control" id="productName" placeholder="e.g. Hand Sanitizer">
+        </div>
+        <div class="col">
+            <label for="productName">Product Description</label>
+            <input type="text" class="form-control" id="productDescription" placeholder="e.g. Cleans hands. 99% effective">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <label for="productName">Product Price (R)</label>
+            <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="20">
+        </div>
+        <div class="col">
+            <label for="productType">Product Category</label>
+            <div class="dropdown" id="productType">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    Categories
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    @*@{
+                        foreach (TypeModel type in types)
+                        {
+                            <li><a href="#"></a></li>
+                            <li><a href="#">...</a></li>
+                            <li><a href="#">...</a></li>
+
+                            }
+                        }*@
+                    <li><a href="#">Item I</a></li>
+                    <li><a href="#">Item II</a></li>
+                    <li><a href="#">Item III</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="input-group">
+        <div class="custom-file">
+            <input type="file" id="fileUpload" />
+        </div>
+    </div>
+</form>
+<br>
+<button type="button" class="btn btn-primary">Add Product</button>
+
+<br>
+<br>
+<div colspan="3" id="imagePreview"></div>
+<textarea id="inputTextToSave"></textarea>
+
+@section Scripts{
+    <script type="text/javascript">
+        var productTypeG;
+        
+
+
+        var contentType = '';
+
+        function loadImage () {
+            var file = document.getElementById("fileUpload").files[0];
+
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var data = event.target.result;
+                document.getElementById("inputTextToSave").value = data;
+                var imageG = data;
+
+                var imagePreview = document.getElementById("imagePreview");
+                imagePreview.innerHTML = '';
+
+                var dataURLReader = new FileReader();
+                dataURLReader.onload = function (event) {
+                    // Parse image properties
+                    var dataURL = event.target.result;
+                    contentType = dataURL.split(",")[0].split(":")[1].split(";")[0];
+
+                    var image = new Image();
+                    image.src = dataURL;
+                    image.onload = function () {
+                        console.log("Image type: " + contentType);
+                        console.log("Image width: " + this.width);
+                        console.log("Image height: " + this.height);
+                        console.log("Hopefully blob: " + imageG);
+                        imagePreview.appendChild(this);
+                    };
+                };
+                dataURLReader.readAsDataURL(file);
+
+
+            };
+            reader.readAsBinaryString(file);
+        }
+
+        function addProduct() {
+            var productName = document.getElementById("productName").value;
+            var productDescription = document.getElementById("productDescription").value;
+            var productPrice = document.getElementById("productPrice").value;
+            var productType = productTypeG;
+            var userId = @userId;
+            var image = imageG;
+
+            if (productName === "" || !productPrice || productType === "") {
+                alert("FORM IS INVALID");
+            }
+
+            $.put("http://localhost:5000/products/",
+                {
+                    "productName": productName,
+                    "productDescription": productDescription,
+                    "productPrice": productPrice,
+                    "productType": productType,
+                    "productName": productName,
+                    "userId": userId,
+                    "image": image
+
+                });
+        }
+
+        $(function () {
+
+            $(".dropdown-menu li a").click(function () {
+
+                $(".btn:first-child").text($(this).text());
+                $(".btn:first-child").val($(this).text());
+                productTypeG = $(".btn:first-child").text();
+            });
+
+        });
+    </script>
+}
