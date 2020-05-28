@@ -1,20 +1,8 @@
-﻿@using System.IO;
-@using System.Net;
-@using Newtonsoft.Json;
-@using Newtonsoft.Json.Linq;
+﻿@using Newtonsoft.Json;
 @using WebStoreApplication.Global;
 
 @{
     ViewData["Title"] = "Products";
-
-    /*ProductModel test = new ProductModel();
-    test.productName = "test";
-    test.productDescription = "passed the test";
-    test.productID = 1;
-    test.price = 2;
-    test.userID = 3;
-    string json = JsonConvert.SerializeObject(test);
-    String test1 = Global.Post("http://localhost:5000/products/", json, "application/json", "PUT");*/
 
     String result = Global.Get("http://localhost:5000/products/all");
 
@@ -28,6 +16,7 @@
         <tr>
             <th scope="col">Product Name</th>
             <th scope="col">Description</th>
+            <th scope="col">Category</th>
             <th scope="col">Price</th>
             <th scope="col"></th>
         </tr>
@@ -39,6 +28,7 @@
                 <tr>
                     <td>@product.productName</td>
                     <td>@product.productDescription</td>
+                    <td>@product.typeModel.typeName</td>
                     <td>R @product.price</td>
                     <td><a href="https://localhost:5001/Home/ProductDetails" onclick="storeProductClicked(@product.productID)">View</a></td>
                 </tr>

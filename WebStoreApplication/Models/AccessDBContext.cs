@@ -1,14 +1,16 @@
 using Dapper;
+using Microsoft.AspNetCore.Cors;
 using System.Collections.Generic;
 
 namespace WebStoreApplication.Models
 {
     public class AccessDBContext: IAccessDBContext
     {
+        // Products
         public int AddProduct(ProductModel product)
         {
-            string query = @"INSERT INTO [CoroNacessitiesDB].dbo.Product (UserID, ProductName, ProductDescription, Price, StatusID, TypeID, ProductImage) VALUES (@UserID, @ProductName, @ProductDescription, @Price, @StatusID, @TypeID, @ProductImage)";
-            return CoroNacessitiesDBContext.getConnection().Execute(query, new {ProductName = product.productName, ProductDescription = product.productDescription, Price = product.price, UserID = product.userID, StatusID = product.statusID, TypeID = product.typeID, ProductImage = product.productImage,});
+            string query = @"INSERT INTO [CoroNacessitiesDB].dbo.Product (UserID, ProductName, ProductDescription, Price, ProductStatusID, TypeID, ProductImage) VALUES (@UserID, @ProductName, @ProductDescription, @Price, @ProductStatusID, @TypeID, @ProductImage)";
+            return CoroNacessitiesDBContext.getConnection().Execute(query, new {ProductName = product.productName, ProductDescription = product.productDescription, Price = product.price, UserID = product.userID, ProductStatusID = product.productStatusID, TypeID = product.typeID, ProductImage = product.productImage,});
         }
         public int RemoveProduct(int productID)
         {
@@ -18,18 +20,47 @@ namespace WebStoreApplication.Models
         public ProductModel GetProduct(int productID)
         {
             string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.Product WHERE ProductID = @ProductID";
-            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<ProductModel>(query, new {ProductID = productID});
+            ProductModel result = CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<ProductModel>(query, new {ProductID = productID});
+            result.typeModel = GetAllProductTypes()[result.typeID-1];
+
+            return result;
         }
         public int UpdateProduct(int id, ProductModel product)
         {
 
-            string query = @"UPDATE [CoroNacessitiesDB].dbo.Product SET ProductName = @ProductName, ProductDescription = @ProductDescription, Price = @Price, UserID = @UserID, StatusID = @StatusID, TypeID = @TypeID, ProductImage = @ProductImage WHERE ProductID = @ProductID";
-            return CoroNacessitiesDBContext.getConnection().Execute(query, new {ProductName = product.productName, ProductDescription = product.productDescription, Price = product.price, UserID = product.userID, StatusID = product.statusID, TypeID = product.typeID, ProductImage = product.productImage, ProductID = id});
+            string query = @"UPDATE [CoroNacessitiesDB].dbo.Product SET ProductName = @ProductName, ProductDescription = @ProductDescription, Price = @Price, UserID = @UserID, ProductStatusID = @ProductStatusID, TypeID = @TypeID, ProductImage = @ProductImage WHERE ProductID = @ProductID";
+            return CoroNacessitiesDBContext.getConnection().Execute(query, new {ProductName = product.productName, ProductDescription = product.productDescription, Price = product.price, UserID = product.userID, ProductStatusID = product.productStatusID, TypeID = product.typeID, ProductImage = product.productImage, ProductID = id});
         } 
         public List<ProductModel> GetAllProducts()
         {
             string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.Product";
-            return CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query).AsList();
+
+            List<ProductModel> result = CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query).AsList();
+
+            foreach(ProductModel pm in result)
+            {
+                pm.typeModel = GetAllProductTypes()[pm.typeID-1];
+            }
+
+            return result;
+        }
+        public List<ProductModel> GetAllUserProducts(int userID)
+        {
+            string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.Product AS p WHERE p.UserID = @UserID";
+            
+            List<ProductModel> result = CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query, new {UserID = userID}).AsList();
+            foreach(ProductModel pm in result)
+            {
+                pm.typeModel = GetAllProductTypes()[pm.typeID-1];
+            }
+
+            return result;
+        }
+
+        public List<TypeModel> GetAllProductTypes()
+        {
+            string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.ProductType ORDER BY TypeID ASC";
+            return CoroNacessitiesDBContext.getConnection().Query<TypeModel>(query).AsList();
         }
 
         //User Details

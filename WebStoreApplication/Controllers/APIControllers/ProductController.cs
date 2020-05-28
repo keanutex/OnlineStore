@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
 using WebStoreApplication.Models;
@@ -40,6 +41,12 @@ namespace WebStoreApplication.Controllers
             return Ok(dbAccessor.GetAllProducts());
         }
 
+        [HttpGet("all/user/{id}")]
+        public IActionResult GetAllUserProducts(int id)
+        {
+            return Ok(dbAccessor.GetAllUserProducts(id));
+        }
+
         
         [HttpDelete("{id}")]
         public IActionResult RemoveProduct(int id)
@@ -65,6 +72,12 @@ namespace WebStoreApplication.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet("all/product-types")]
+        public IActionResult GetAllProductTypes()
+        {
+            return Ok(dbAccessor.GetAllProductTypes());
         }
     }
 }
