@@ -34,6 +34,7 @@ namespace WebStoreApplication.Models
         public OrdersModel GetOrder(int orderID);
         public int UpdateOrder(int orderID, OrdersModel order);
         public List<OrdersModel> GetAllOrdersForUser(int userID);
+        public List<ProductModel> GetAllProductsInOrder(int userID, string statusDescription);
 
 
         // Order Status
