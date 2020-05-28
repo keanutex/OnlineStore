@@ -82,7 +82,7 @@ namespace WebStoreApplication.Models
                 new MediaTypeWithQualityHeaderValue("application/json"));
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jsonResp.access_token);
             // Wrap our JSON inside a StringContent which then can be used by the HttpClient class
-            request.Content = new StringContent("{   \"intent\": \"sale\",   \"payer\": {     \"payment_method\": \"paypal\"   },   \"transactions\": [     {       \"amount\": {         \"total\": \"" + total + "\",         \"currency\": \"USD\"       },       \"payment_options\": {         \"allowed_payment_method\": \"INSTANT_FUNDING_SOURCE\"       }     }   ],   \"redirect_urls\": {     \"return_url\": \"https://localhost:5001/\",     \"cancel_url\": \"https://localhost:5001/\"   } }", Encoding.UTF8, "application/json");
+            request.Content = new StringContent("{   \"intent\": \"sale\",   \"payer\": {     \"payment_method\": \"paypal\"   },   \"transactions\": [     {       \"amount\": {         \"total\": \"" + total + "\",         \"currency\": \"USD\"       },       \"payment_options\": {         \"allowed_payment_method\": \"INSTANT_FUNDING_SOURCE\"       }     }   ],   \"redirect_urls\": {     \"return_url\": \"https://localhost:5001/payments/execute/\",     \"cancel_url\": \"https://localhost:5001/\"   } }", Encoding.UTF8, "application/json");
             response =  await PayPalServerContext.GetClient().SendAsync(request);
             if (!response.IsSuccessStatusCode)
             {

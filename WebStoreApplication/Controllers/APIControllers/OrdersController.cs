@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStoreApplication.Models;
 using WebStoreApplication.Shared;
+using System.Collections.Generic;
 
 namespace WebStoreApplication.Controllers.APIControllers
 {

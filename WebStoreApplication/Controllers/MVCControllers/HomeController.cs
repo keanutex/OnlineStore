@@ -24,7 +24,6 @@ namespace WebStoreApplication.Controllers
         {
             return View();
         }
-
        
         public IActionResult Privacy()
         {
