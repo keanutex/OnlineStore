@@ -122,6 +122,8 @@ INSERT [dbo].[OrderItem] ([OrderItemID], [OrderID], [ProductID], [NoOfProducts])
 GO
 INSERT [dbo].[OrderItem] ([OrderItemID], [OrderID], [ProductID], [NoOfProducts]) VALUES (4, 3, 5, 6)
 GO
+INSERT [dbo].[OrderItem] ([OrderItemID], [OrderID], [ProductID], [NoOfProducts]) VALUES (5, 3, 2, 3)
+GO
 SET IDENTITY_INSERT [dbo].[OrderItem] OFF
 GO
 

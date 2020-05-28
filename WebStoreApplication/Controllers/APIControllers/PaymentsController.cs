@@ -28,13 +28,13 @@ namespace WebStoreApplication.Controllers
             }
         }
 
-        [HttpPost("create-payment/{total}/")]
+        [HttpGet("create-payment")]
         public IActionResult CreatePayment(string total)
         {
             var url = payPalAccessor.CreatePayment(total);
             if (url != null)
             {
-                return Ok(new {approval_url = url.Result});
+                return Redirect(url.Result);
             }
             else
             {
@@ -42,17 +42,17 @@ namespace WebStoreApplication.Controllers
             }
         }
 
-        [HttpPost("execute/{payerid}/")]
-        public IActionResult ExecutePayment(string payerid)
+        [HttpGet("execute/")]
+        public IActionResult ExecutePayment(string PayerID)
         {
-            var result = payPalAccessor.ExecutePayment(payerid);
+            var result = payPalAccessor.ExecutePayment(PayerID);
             if (result != null)
             {
-                return Ok();
+                return Redirect("https://localhost:5001/");
             }
             else
             {
-                return BadRequest();   
+                return BadRequest();
             }
         }
     }
