@@ -18,6 +18,7 @@ namespace WebStoreApplication.Models
 
         //Location Details
         public LocationModel GetLocation(int userId);
+        public List<CityModel> GetAllCities();
       
 
         // Order Items

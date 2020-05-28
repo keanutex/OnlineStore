@@ -73,6 +73,12 @@ namespace WebStoreApplication.Models
             return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<LocationModel>(query, new { UserID = userId });
         }
 
+        public List<CityModel> GetAllCities()
+        {
+            string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.City";
+            return CoroNacessitiesDBContext.getConnection().Query<CityModel>(query).AsList();
+        }
+
         // Order Items
         public int AddOrderItems(int orderItemID, OrderItemModel orderItem)
         {
