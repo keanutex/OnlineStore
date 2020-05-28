@@ -47,6 +47,7 @@ namespace WebStoreApplication.Models
         public async Task<string> CreatePayment(string total)
         {
             // GET PAYPAL ACCESS TOKEN
+            PayPalServerContext.InitialiseClient();
             PayPalServerContext.GetClient().BaseAddress = new Uri("https://api.sandbox.paypal.com/v1/oauth2/token/");
             PayPalServerContext.GetClient().DefaultRequestHeaders.Accept.Clear();
             PayPalServerContext.GetClient().DefaultRequestHeaders.Accept.Add(
@@ -81,7 +82,7 @@ namespace WebStoreApplication.Models
                 new MediaTypeWithQualityHeaderValue("application/json"));
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jsonResp.access_token);
             // Wrap our JSON inside a StringContent which then can be used by the HttpClient class
-            request.Content = new StringContent("{   \"intent\": \"sale\",   \"payer\": {     \"payment_method\": \"paypal\"   },   \"transactions\": [     {       \"amount\": {         \"total\": \"" + total + "\",         \"currency\": \"USD\"       },       \"payment_options\": {         \"allowed_payment_method\": \"INSTANT_FUNDING_SOURCE\"       }     }   ],   \"redirect_urls\": {     \"return_url\": \"https://example.com\",     \"cancel_url\": \"https://example.com\"   } }", Encoding.UTF8, "application/json");
+            request.Content = new StringContent("{   \"intent\": \"sale\",   \"payer\": {     \"payment_method\": \"paypal\"   },   \"transactions\": [     {       \"amount\": {         \"total\": \"" + total + "\",         \"currency\": \"USD\"       },       \"payment_options\": {         \"allowed_payment_method\": \"INSTANT_FUNDING_SOURCE\"       }     }   ],   \"redirect_urls\": {     \"return_url\": \"https://localhost:5001/\",     \"cancel_url\": \"https://localhost:5001/\"   } }", Encoding.UTF8, "application/json");
             response =  await PayPalServerContext.GetClient().SendAsync(request);
             if (!response.IsSuccessStatusCode)
             {
@@ -114,6 +115,7 @@ namespace WebStoreApplication.Models
             }
             string resp = await response.Content.ReadAsStringAsync();
             Console.WriteLine("ExecutePayment() Response:\t" + resp);
+            PayPalServerContext.GetClient().Dispose();
             return "";
         }
     }

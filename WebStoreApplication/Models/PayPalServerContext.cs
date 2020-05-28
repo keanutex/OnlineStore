@@ -8,13 +8,17 @@ namespace WebStoreApplication.Models
         public static string payPalExecuteURL {get;set;}
         static PayPalServerContext ()
         {
-            client = new HttpClient();
+            // client = new HttpClient();
             payPalAccessToken = "";
             payPalExecuteURL = "";
         }
         public static HttpClient GetClient()
         {
             return client;
+        }
+        public static void InitialiseClient()
+        {
+            client = new HttpClient();
         }
     }
 }
