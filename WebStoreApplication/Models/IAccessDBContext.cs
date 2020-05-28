@@ -14,6 +14,8 @@ namespace WebStoreApplication.Models
 
         public int AddProductToCart(int userID, int orderStatusID, int productID, int noOfProducts);
 
+        public int EmptyCart(int userId);
+
         //User Details
         public UserModel GetUserByUsername(string username);
         public UserModel GetUserById(int userId);

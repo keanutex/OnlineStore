@@ -89,5 +89,12 @@ namespace WebStoreApplication.Controllers
             dbAccessor.AddProductToCart(Session.userId, 3, productId, 1);
             return Redirect("https://localhost:5001/");
         }
+
+        [HttpPost("emptyCart")]
+        public int EmptyCart(int userId)
+        {
+            dbAccessor.EmptyCart(Session.userId);
+            return 0;
+        }
     }
 }

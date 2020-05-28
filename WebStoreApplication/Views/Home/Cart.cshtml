@@ -37,4 +37,17 @@
 <h3>Total Amount</h3>
 <h4>@total</h4>
 <hr/>
-<a class="btn btn-primary" href="@Url.Action("create-payment", "payments", new {total=total})">Check out</a>
+<a class="btn btn-primary" onclick="emptyCart()" href="@Url.Action("create-payment", "payments", new {total=total})">Check out</a>
+
+@section Scripts{ 
+<script>function emptyCart() {
+    var settings = {
+        "url": "https://localhost:5001/products/emptyCart",
+        "method": "POST",
+        "timeout": 0
+    };
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+    }</script>
+}

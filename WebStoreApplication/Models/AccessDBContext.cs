@@ -199,6 +199,14 @@ namespace WebStoreApplication.Models
             return CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query, new { UserID = userID, statusDescription = statusDescription}).AsList();
         }
 
+        public int EmptyCart(int userID)
+        {
+            string query = @"UPDATE Orders
+                            SET OrderStatusID = 4
+                            WHERE userID = @userID";
+            return CoroNacessitiesDBContext.getConnection().Execute(query, new { userID = userID });
+        }
+
 
         // Order Status
         public int AddOrderStatus(OrderStatusModel orderStatus)
