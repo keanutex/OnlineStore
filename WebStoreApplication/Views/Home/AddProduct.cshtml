@@ -7,9 +7,9 @@
 
     int userId = Session.userId;
 
-    //String result = Global.Get("http://localhost:5000/products/types");
+    String result = Global.Get("https://localhost:5001/products/all/product-types");
 
-    //List<TypeModel> types = JsonConvert.DeserializeObject<List<TypeModel>>(result);
+    List<TypeModel> types = JsonConvert.DeserializeObject<List<TypeModel>>(result);
 }
 
 <h1>Add Product</h1>
@@ -21,15 +21,15 @@
             <input type="text" class="form-control" id="productName" placeholder="e.g. Hand Sanitizer">
         </div>
         <div class="col">
-            <label for="productName">Product Description</label>
+            <label for="productDescription">Product Description</label>
             <input type="text" class="form-control" id="productDescription" placeholder="e.g. Cleans hands. 99% effective">
         </div>
     </div>
     <br>
     <div class="row">
         <div class="col">
-            <label for="productName">Product Price (R)</label>
-            <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="20">
+            <label for="productPrice">Product Price (R)</label>
+            <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="20" id="productPrice">
         </div>
         <div class="col">
             <label for="productType">Product Category</label>
@@ -39,19 +39,13 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    @*@{
+                   @{
                         foreach (TypeModel type in types)
                         {
-                            <li><a href="#"></a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">...</a></li>
+                            <li><a href="#">@type.typeName</a></li>
 
                             }
-                        }*@
-                    <li><a href="#">Item I</a></li>
-                    <li><a href="#">Item II</a></li>
-                    <li><a href="#">Item III</a></li>
-
+                        }
                 </ul>
             </div>
         </div>
@@ -59,12 +53,12 @@
     <br>
     <div class="input-group">
         <div class="custom-file">
-            <input type="file" id="fileUpload" />
+            <input type="file" id="fileUpload" onchange="loadImage()"/>
         </div>
     </div>
 </form>
 <br>
-<button type="button" class="btn btn-primary">Add Product</button>
+<button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button>
 
 <br>
 <br>
@@ -74,7 +68,7 @@
 @section Scripts{
     <script type="text/javascript">
         var productTypeG;
-        
+        var imageG;
 
 
         var contentType = '';
@@ -85,9 +79,15 @@
             var reader = new FileReader();
             reader.onload = function (event) {
                 var data = event.target.result;
-                document.getElementById("inputTextToSave").value = data;
-                var imageG = data;
 
+                var data16 = new Uint16Array(data);
+                var text = [];
+                for (i = 0; i < data16.length; i++) {
+                    text.push(data16[i]);
+                }
+
+                document.getElementById("inputTextToSave").value = text;
+                imageG = text;
                 var imagePreview = document.getElementById("imagePreview");
                 imagePreview.innerHTML = '';
 
@@ -103,7 +103,6 @@
                         console.log("Image type: " + contentType);
                         console.log("Image width: " + this.width);
                         console.log("Image height: " + this.height);
-                        console.log("Hopefully blob: " + imageG);
                         imagePreview.appendChild(this);
                     };
                 };
@@ -111,7 +110,8 @@
 
 
             };
-            reader.readAsBinaryString(file);
+            //reader.readAsBinaryString(file);
+            reader.readAsArrayBuffer(file);
         }
 
         function addProduct() {
@@ -124,19 +124,34 @@
 
             if (productName === "" || !productPrice || productType === "") {
                 alert("FORM IS INVALID");
+            } else {
+                var data = 
+                    {
+                        productName: productName,
+                        productDescription: productDescription,
+                        price: parseInt(productPrice),
+                        typeID: 1,
+                        productName: productName,
+                        userID: 1,
+                        statusID : 1,
+                        productImage: image
+                    }
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://localhost:5000/products/',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data), // access in body
+                }).done(function () {
+                    console.log('SUCCESS');
+                }).fail(function (msg) {
+                    console.log('FAIL');
+                    console.log(data);
+                }).always(function (msg) {
+                    console.log('ALWAYS');
+                });
             }
 
-            $.put("http://localhost:5000/products/",
-                {
-                    "productName": productName,
-                    "productDescription": productDescription,
-                    "productPrice": productPrice,
-                    "productType": productType,
-                    "productName": productName,
-                    "userId": userId,
-                    "image": image
-
-                });
+            
         }
 
         $(function () {
