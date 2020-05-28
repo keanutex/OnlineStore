@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
 
 namespace WebStoreApplication.Controllers.APIControllers
 {
@@ -36,7 +37,7 @@ namespace WebStoreApplication.Controllers.APIControllers
         [HttpGet("all/")]
         public IActionResult GetAllOrderedItems()
         {
-            int userID = 2;
+            int userID = Session.userId;
             string statusDescription = "Accepted";
             return Ok(dbAccessor.GetAllProductsInOrder(userID, statusDescription));
         }

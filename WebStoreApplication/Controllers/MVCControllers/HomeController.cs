@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
 
 namespace WebStoreApplication.Controllers
 {
@@ -67,8 +68,7 @@ namespace WebStoreApplication.Controllers
 
         public IActionResult Cart()
         {
-            bool isLoggedIn = true;
-            if (isLoggedIn != true) {
+            if (Session.username == null) {
                 return View("Login");
             }
             return View();
