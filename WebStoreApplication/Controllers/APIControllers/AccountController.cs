@@ -25,7 +25,7 @@ namespace WebStoreApplication.Controllers
             {
                 if (common.CreateHashPassword(login.password).Equals(dbAccessor.GetUserPassword(login.username), StringComparison.InvariantCultureIgnoreCase))
                 {
-                    UserModel user = dbAccessor.GetUser(login.username);
+                    UserModel user = dbAccessor.GetUserByUsername(login.username);
                     Session.userId = user.userId;
                     Session.username = login.username;
                     return Redirect("https://localhost:5001/");
@@ -54,7 +54,7 @@ namespace WebStoreApplication.Controllers
         {
             try
             {
-                UserModel user = dbAccessor.GetUser(newUser.username);
+                UserModel user = dbAccessor.GetUserByUsername(newUser.username);
 
                 if (user == null)
                 {

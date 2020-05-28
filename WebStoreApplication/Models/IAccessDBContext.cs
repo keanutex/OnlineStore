@@ -13,7 +13,8 @@ namespace WebStoreApplication.Models
         public List<TypeModel> GetAllProductTypes();
 
         //User Details
-        public UserModel GetUser(string username);
+        public UserModel GetUserByUsername(string username);
+        public UserModel GetUserById(int userId);
         public int UpdateUser(UserModel user);
         public string GetUserPassword(string username);
         public int AddUser(RegisterModel user);
