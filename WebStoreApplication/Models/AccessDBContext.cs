@@ -128,6 +128,20 @@ namespace WebStoreApplication.Models
             return CoroNacessitiesDBContext.getConnection().Query<OrdersModel>(query, new { UserID = userID }).AsList();
         }
 
+        public List<ProductModel> GetAllProductsInOrder(int userID, string statusDescription)
+        {
+            string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.Product
+                                INNER JOIN OrderItem
+                                ON Product.productId=OrderItem.ProductID
+                                INNER JOIN Orders
+                                ON OrderItem.OrderID=Orders.OrderID
+                                INNER JOIN OrderStatus
+                                ON Orders.OrderStatusID=OrderStatus.OrderStatusID
+                                WHERE Orders.UserID = @UserID
+                                AND OrderStatus.OrderStatusDescription = @StatusDescription";
+            return CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query, new { UserID = userID, statusDescription = statusDescription}).AsList();
+        }
+
 
         // Order Status
         public int AddOrderStatus(OrderStatusModel orderStatus)

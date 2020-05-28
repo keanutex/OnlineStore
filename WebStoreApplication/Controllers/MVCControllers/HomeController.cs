@@ -65,6 +65,15 @@ namespace WebStoreApplication.Controllers
             return View();
         }
 
+        public IActionResult Cart()
+        {
+            bool isLoggedIn = true;
+            if (isLoggedIn != true) {
+                return View("Login");
+            }
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
