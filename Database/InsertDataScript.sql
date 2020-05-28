@@ -74,11 +74,11 @@ print 'Product table inserts done'
 
 SET IDENTITY_INSERT [dbo].[ProductType] ON
 GO
-INSERT [dbo].[ProductType] ([TypeID],[UserID],[TypeName]) VALUES (1, 1, N'Mask')
+INSERT [dbo].[ProductType] ([TypeID],[TypeName]) VALUES (1, N'Mask')
 GO
-INSERT [dbo].[ProductType] ([TypeID],[UserID],[TypeName]) VALUES (2, 1, N'Sanitizer')
+INSERT [dbo].[ProductType] ([TypeID],[TypeName]) VALUES (2, N'Sanitizer')
 GO
-INSERT [dbo].[ProductType] ([TypeID],[UserID],[TypeName]) VALUES (3, 3, N'Gloves')
+INSERT [dbo].[ProductType] ([TypeID],[TypeName]) VALUES (3, N'Gloves')
 GO
 SET IDENTITY_INSERT [dbo].[ProductType] OFF
 GO
