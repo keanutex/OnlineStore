@@ -38,6 +38,12 @@ namespace WebStoreApplication.Models
             return CoroNacessitiesDBContext.getConnection().Query<ProductModel>(query, new {UserID = userID}).AsList();
         }
 
+        public List<TypeModel> GetAllProductTypes()
+        {
+            string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.ProductType";
+            return CoroNacessitiesDBContext.getConnection().Query<TypeModel>(query).AsList();
+        }
+
         //User Details
         public UserModel GetUser(string username)
         {

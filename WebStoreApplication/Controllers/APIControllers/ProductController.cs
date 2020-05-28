@@ -72,5 +72,11 @@ namespace WebStoreApplication.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("all/product-types")]
+        public IActionResult GetAllProductTypes()
+        {
+            return Ok(dbAccessor.GetAllProductTypes());
+        }
     }
 }

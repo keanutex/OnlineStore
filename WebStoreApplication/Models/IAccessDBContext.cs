@@ -10,6 +10,7 @@ namespace WebStoreApplication.Models
         public int UpdateProduct(int id, ProductModel product); 
         public List<ProductModel> GetAllProducts();
         public List<ProductModel> GetAllUserProducts(int userID);
+        public List<TypeModel> GetAllProductTypes();
 
         //User Details
         public UserModel GetUser(string username);

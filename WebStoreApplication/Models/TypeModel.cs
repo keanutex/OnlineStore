@@ -7,5 +7,7 @@ namespace WebStoreApplication.Models
 {
     public class TypeModel
     {
+        public int typeID {get; set;}
+        public string typeName {get; set;}
     }
 }
