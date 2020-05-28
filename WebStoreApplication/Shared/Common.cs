@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebStoreApplication.Models
+namespace WebStoreApplication.Shared
 {
     public class Common
     {
@@ -21,6 +21,11 @@ namespace WebStoreApplication.Models
                 numBytesRequested: 256 / 8));
 
             return hashed;
+        }
+
+        public Common()
+        {
+
         }
     }
 }
