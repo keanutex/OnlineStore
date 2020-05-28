@@ -47,11 +47,11 @@ namespace WebStoreApplication.Models
          }
         public int AddUser(RegisterModel user)
         {
-            string queryAddress = @"INSERT INTO [CoroNacessitiesDB].dbo.Address (ComplexName, UnitNumber, StreetName, StreetNumber, Suburb, CityID) VALUES (@ComplexName, @UnitNumber, @StreetName,@StreetNumber , @Suburb, @CityID)";
-            CoroNacessitiesDBContext.getConnection().Execute(queryAddress, new { ComplexName = user.complexName, UnitNumber = user.unitNumber, StreetName = user.streetName, StreetNumber = user.streetNumber, Suburb = user.suburb, CityID = user.cityID });
+            string queryAddress = @"INSERT INTO [CoroNacessitiesDB].dbo.Address (ComplexName, UnitNumber, StreetName, StreetNumber, Suburb, CityID) VALUES (@ComplexName, @UnitNumber, @StreetName,@StreetNumber , @Suburb, @CityID) SELECT SCOPE_IDENTITY() ;";
+            int addressID = CoroNacessitiesDBContext.getConnection().ExecuteScalar<int>(queryAddress, new { ComplexName = user.complexName, UnitNumber = user.unitNumber, StreetName = user.streetName, StreetNumber = user.streetNumber, Suburb = user.suburb, CityID = user.cityID });
 
             string queryUser = @"INSERT INTO [CoroNacessitiesDB].dbo.Users (Username, Password, Name, Surname, Email, ContactNo , Rating , PayPalInfo ,AddressID) VALUES (@Username, @Password, @Name, @Surname, @Email, @ContactNo , @Rating , @PayPalInfo , @AddressID)";
-            return CoroNacessitiesDBContext.getConnection().Execute(queryUser, new { Username = user.username , Password = user.password , Name = user.name , Surname = user.surname , Email=user.email , ContactNo= user.contactNo, Rating = user.rating , PayPalInfo = user.payPalInfo , AddressID = user.addressId });
+            return CoroNacessitiesDBContext.getConnection().Execute(queryUser, new { Username = user.username , Password = user.password , Name = user.name , Surname = user.surname , Email=user.email , ContactNo= user.contactNo, Rating = user.rating , PayPalInfo = user.payPalInfo , AddressID = addressID });
         }
 
         public string GetUserPassword(string username)
@@ -67,16 +67,23 @@ namespace WebStoreApplication.Models
         }
 
         //Location Details
-        public LocationModel GetLocation(int userId)
+        public LocationModel GetLocation(string username)
         {
-            string query = @"SELECT * FROM [dbo].[LocationView] where UserID=@UserID;";
-            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<LocationModel>(query, new { UserID = userId });
+            string query = @"SELECT * FROM [dbo].[LocationView] where Username=@Username;";
+            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<LocationModel>(query, new { Username = username });
         }
 
         public List<CityModel> GetAllCities()
         {
             string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.City";
             return CoroNacessitiesDBContext.getConnection().Query<CityModel>(query).AsList();
+        }
+        
+        public AddressModel GetAddress(int addressID)
+        {
+            string query = @"SELECT * FROM [CoroNacessitiesDB].dbo.Address WHERE AddressID = @AddressID";
+            return CoroNacessitiesDBContext.getConnection().QuerySingleOrDefault<AddressModel>(query, new { AddressID = addressID });
+
         }
 
         // Order Items

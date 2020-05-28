@@ -16,7 +16,6 @@ namespace WebStoreApplication.Models
         public string contactNo { get; set; }
         public int rating { get; set; }
         public string payPalInfo { get; set; }
-        public int addressId { get; set; }
         public string complexName { get; set; }
         public int unitNumber { get; set; }
         public string streetName { get; set; }
