@@ -66,6 +66,10 @@ namespace WebStoreApplication.Controllers
 
         public IActionResult AddProduct()
         {
+            if (Session.username == null)
+            {
+                return View("Login");
+            }
             return View();
         }
 
