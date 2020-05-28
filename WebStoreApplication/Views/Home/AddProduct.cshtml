@@ -9,7 +9,6 @@
 
     String result = Global.Get("http://localhost:5000/products/all/product-types");
     List<TypeModel> types = JsonConvert.DeserializeObject<List<TypeModel>>(result);
-
 }
 
 <h1>Add Product</h1>
@@ -33,107 +32,50 @@
         </div>
         <div class="col">
             <label for="productType">Product Category</label>
-            <div class="dropdown" id="productType">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                    Categories
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                   @{
+                <select class="browser-default custom-select" id="productType" onchange="updateType()">
+                    <option value="0">Select a category</option>
+                    @{
                         foreach (TypeModel type in types)
                         {
-                            <li><a href="#">@type.typeName</a></li>
+                                        <option value="@type.typeID">
+                                            @type.typeName
+                                        </option>
 
-                            }
                         }
-                </ul>
-            </div>
+                    }
+                    </select>
+</div>
         </div>
-    </div>
-    <br>
-    <div class="input-group">
-        <div class="custom-file">
-            <input type="file" id="fileUpload" onchange="loadImage()"/>
-        </div>
-    </div>
+
 </form>
 <br>
 <button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button>
 
-<br>
-<br>
-<div colspan="3" id="imagePreview"></div>
-<textarea id="inputTextToSave"></textarea>
-
 @section Scripts{
     <script type="text/javascript">
-        var productTypeG;
-        var imageG;
-
-
-        var contentType = '';
-
-        function loadImage () {
-            var file = document.getElementById("fileUpload").files[0];
-
-            var reader = new FileReader();
-            reader.onload = function (event) {
-                var data = event.target.result;
-
-                var data16 = new Uint16Array(data);
-                var text = [];
-                for (i = 0; i < data16.length; i++) {
-                    text.push(data16[i]);
-                }
-
-                document.getElementById("inputTextToSave").value = text;
-                imageG = text;
-                var imagePreview = document.getElementById("imagePreview");
-                imagePreview.innerHTML = '';
-
-                var dataURLReader = new FileReader();
-                dataURLReader.onload = function (event) {
-                    // Parse image properties
-                    var dataURL = event.target.result;
-                    contentType = dataURL.split(",")[0].split(":")[1].split(";")[0];
-
-                    var image = new Image();
-                    image.src = dataURL;
-                    image.onload = function () {
-                        console.log("Image type: " + contentType);
-                        console.log("Image width: " + this.width);
-                        console.log("Image height: " + this.height);
-                        imagePreview.appendChild(this);
-                    };
-                };
-                dataURLReader.readAsDataURL(file);
-
-
-            };
-            //reader.readAsBinaryString(file);
-            reader.readAsArrayBuffer(file);
-        }
-
+        var productIdG = "0";
+ 
         function addProduct() {
             var productName = document.getElementById("productName").value;
             var productDescription = document.getElementById("productDescription").value;
             var productPrice = document.getElementById("productPrice").value;
-            var productType = productTypeG;
             var userId = @userId;
-            var image = imageG;
+            var statusId;
 
-            if (productName === "" || !productPrice || productType === "") {
+            if (productName === "" || !productPrice || productType === "" || productType === "0") {
                 alert("FORM IS INVALID");
-            } else {
+            } else if(!userId){
+                alert("You are not logged in.");
+            }else {
                 var data = 
                     {
                         productName: productName,
                         productDescription: productDescription,
                         price: parseInt(productPrice),
-                        typeID: 1,
+                        typeID: parseInt(productIdG),
                         productName: productName,
-                        userID: 1,
-                        statusID : 1,
+                        userID: userId,
+                        productStatusID : 1,
                         productImage: ""
                 }
                 var settings = {
@@ -154,15 +96,9 @@
             
         }
 
-        $(function () {
+        function updateType() {
+            productIdG = document.getElementById("productType").value;
+        }
 
-            $(".dropdown-menu li a").click(function () {
-
-                $(".btn:first-child").text($(this).text());
-                $(".btn:first-child").val($(this).text());
-                productTypeG = $(".btn:first-child").text();
-            });
-
-        });
     </script>
 }

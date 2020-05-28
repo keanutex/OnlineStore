@@ -113,6 +113,7 @@
         <tr>
             <th scope="col">Product Name</th>
             <th scope="col">Description</th>
+            <th scope="col">Category</th>
             <th scope="col">Price</th>
             <th scope="col"></th>
         </tr>
@@ -124,6 +125,7 @@
                 <tr>
                     <td>@product.productName</td>
                     <td>@product.productDescription</td>
+                    <td>@product.typeModel.typeName</td>
                     <td>R @product.price</td>
                     <td><a href="https://localhost:5001/Home/ProductDetails" onclick="storeProductClicked(@product.productID)">View</a></td>
                 </tr>
