@@ -17,7 +17,7 @@ namespace WebStoreApplication.Models
         public int UpdateAddress(AddressModel address);
 
         //Location Details
-        public LocationModel GetLocation(string username);
+        public LocationModel GetLocation(int userId);
       
 
         // Order Items
