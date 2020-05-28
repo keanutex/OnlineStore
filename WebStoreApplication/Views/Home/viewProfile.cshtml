@@ -3,150 +3,105 @@
     ViewData["Title"] = "viewProfile";
 }
 
-    <form action="action_page.php">
-        <div class="container">
-            <h1>Seller Profile</h1>
-            <hr />
-            <h2>Personal Details</h2>
-            <hr>
 
-            <label for="UserName"><b>User Name</b></label>
-            <input type="text"  name="username" id="username" required readonly>
+<form>
+    <div class="container">
+        <h1>My Profile</h1>
+        <p>Please fill in this form to create an account.</p>
 
-            <label for="FirstName"><b>First Name</b></label>
-            <input type="text"  name="firstname" id="firstname" required readonly>
+        <p>Already have an account? <a asp-area="" asp-controller="Home" asp-action="Login">Sign in</a>.</p>
 
-            <label for="UserName"><b>Surname</b></label>
-            <input type="text"  name="surname" id="surname" required readonly >
-
-            <label for="Email"><b>Email</b></label>
-            <input type="text"  name="email" id="email" required readonly>
-
-            <label for="Contact Number"><b>Contact Number</b></label>
-            <input type="text"  name="contactnumber" id="contactnumber" required readonly>
-
-            <label for="Rating"><b>Rating</b></label>
-            <input type="text"  name="rating" id="rating" required readonly>
-
-            <hr>
+    </div>
+    <hr>
+    <h2>Personal Details</h2>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Username" readonly>
         </div>
-        <div id="map"></div>
-        <script>
-
-            var map;
-            function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: -30.033333, lng: 27.116667 },
-
-                    zoom: 8
-                });
-            }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQX3wFfeEOeD1lq_b3h1rcB4wUMU4cCC8&callback=initMap"
-                async defer></script>
-        <div class="container">
-            <h2>Address Details</h2>
-            <hr>
-
-            <label for="Street Number"><b>Street Number</b></label>
-            <input type="text"  name="streetNumber" id="streetNumber" required readonly>
-
-            <label for="Street Name"><b>Street Name</b></label>
-            <input type="text"  name="streetName" id="streetName" required readonly>
-
-            <label for="Complex Name"><b>Complex Name</b></label>
-            <input type="text" name="complexName" id="complexName" required readonly>
-
-            <label for="Unit Number"><b>Unit Number</b></label>
-            <input type="text"  name="unitNumber" id="unitNumber" required readonly>
-
-            <label for="Suburb"><b>Suburb</b></label>
-            <input type="text"  name="suburb" id="suburb" required readonly>
-
-            <label for="City"><b>City</b></label>
-            <input type="text"  name="City" id="City" required readonly>
-            <hr>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="First Name" readonly>
         </div>
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="btn-danger" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");">Back</button>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Surname</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Surname" readonly>
         </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Email Address</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Email Address" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Contacnt Number</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Contacnt Number" readonly>
+        </div>
+    </div>
 
-    </form>
+    <hr />
 
-<style>
+    <div id="googleMap" style="width:100%;height:400px;"></div>
 
-     
-         /* Always set the map height explicitly to define the size of the div
-    * element that contains the map. */
-        #map {
-            height: 400px;
-            width: 100%;
-        }
+    <hr />
 
-    * {
-        box-sizing: border-box
+    <h2>Adress Details</h2>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Street Number</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Street Number" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Street Name</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Street Name" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Complex Name</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Complex Name" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Unit Number</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Unit Number" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Suburb</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="Suburb" readonly>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">City</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="City">
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-secondary btn-lg btn-block">Update</button>
+    <button type="button" class="btn btn-danger btn-lg btn-block" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");">Cancel</button>
+
+</form>
+
+<script>
+    function myMap() {
+        var mapProp = {
+            center: new google.maps.LatLng(51.508742, -0.120850),
+            zoom: 5,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
     }
+</script>
 
-    /* Add padding to containers */
-    .container {
-        padding: 16px;
-    }
-
-    /* Full-width input fields */
-    input[type=text], input[type=password] {
-        width: 100%;
-        padding: 15px;
-        margin: 5px 0 22px 0;
-        display: inline-block;
-        border: none;
-        background: #f1f1f1;
-    }
-
-        input[type=text]:focus, input[type=password]:focus {
-            background-color: #ddd;
-            outline: none;
-        }
-
-    /* Overwrite default styles of hr */
-    hr {
-        border: 1px solid #f1f1f1;
-        margin-bottom: 25px;
-    }
-
-    /* Set a style for all buttons */
-    button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-    }
-
-        /* Add a hover effect for buttons */
-        button:hover {
-            opacity: 0.8;
-        }
-
-    .registerbtn:hover {
-        opacity: 1;
-    }
-
-    /* Add a blue text color to links */
-    a {
-        color: dodgerblue;
-    }
-
-    /* Set a grey background color and center the text of the "sign in" section */
-    .signin {
-        background-color: #f1f1f1;
-        text-align: center;
-    }
-</style>
-
-
-
-
-
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMgp8KNu--8z1l3FwX8A_veESiSxPmyIo&callback=initMap"></script>
