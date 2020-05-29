@@ -1,5 +1,4 @@
-﻿@model WebStoreApplication.Models.RegisterModel;
-@using Newtonsoft.Json;
+﻿@using Newtonsoft.Json;
 @using WebStoreApplication.Global;
 
 @{
@@ -94,7 +93,7 @@
     <div class="form-group row">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Suburb</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="colFormLabel" placeholder="Suburb">
+            <input type="text" class="form-control" id="suburb" placeholder="Suburb">
         </div>
     </div>
     <div class="form-group row">
@@ -117,7 +116,7 @@
     </div>
 
     <button type="submit" class="btn btn-secondary btn-lg btn-block" onclick="Register()">Register</button>
-    <button type="button" class="btn btn-danger btn-lg btn-block" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");">Cancel</button>
+    <button type="button" class="btn btn-danger btn-lg btn-block" onclick="@("window.location.href='" + @Url.Action("Products", "Home") + "'");">Cancel</button>
 
 </form>
 
@@ -131,7 +130,7 @@
             var firstName = document.getElementById("name").value;
             var surname = document.getElementById("surname").value;
             var email = document.getElementById("email").value;
-            var contactNr = document.getElementById("contactNr").value;
+            var contactNr = document.getElementById("contactNo").value;
 
             var password = document.getElementById("password").value;
             var confirmPassword = document.getElementById("confirmPassword").value;
@@ -155,21 +154,25 @@
                         email: email,
                         contactNo: contactNr,
                         complexName: complexName,
-                        unitNumber: unitNr,
+                        unitNumber: parseInt( unitNr),
                         streetName: streetName,
-                        streetNumber: streetNr,
+                        streetNumber: parseInt(streetNr),
                         suburb: suburb,
-                        cityID: city
+                        cityID:  parseInt(city)
                 }
+                console.log("DATA", JSON.stringify(data));
                 var settings = {
                     "url": "https://localhost:5001/user/register",
                     "method": "POST",
                     "timeout": 0,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
                     "data": JSON.stringify(data),
                 };
 
                 $.ajax(settings).done(function (response) {
-                    console.log(response);
+                    window.location.href = "https://localhost:5001";
                 });
             }
 

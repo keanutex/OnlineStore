@@ -7,7 +7,7 @@ namespace WebStoreApplication.Models
         private static SqlConnection connection;
         static CoroNacessitiesDBContext()
         {
-            connection = new SqlConnection ("Data Source=BBD-DL\\SQLEXPRESS;Database=CoroNacessitiesDB;Integrated Security=SSPI;");
+            connection = new SqlConnection ("Data Source=KEANUT;Database=CoroNacessitiesDB;Integrated Security=SSPI;");
             connection.Open();
         }
 

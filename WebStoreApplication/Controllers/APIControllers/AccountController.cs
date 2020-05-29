@@ -50,7 +50,7 @@ namespace WebStoreApplication.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromForm]RegisterModel newUser)
+        public IActionResult Register(RegisterModel newUser)
         {
             try
             {

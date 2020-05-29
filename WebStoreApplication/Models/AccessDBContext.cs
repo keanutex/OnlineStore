@@ -73,16 +73,16 @@ namespace WebStoreApplication.Models
         public int UpdateUser(UserModel user)
         {
             string query = @"UPDATE [CoroNacessitiesDB].dbo.Users SET Password=@Password , Name = @Name, Surname=@Surname , Email=@Email ,ContactNo= @ContactNo, Rating=@Rating ,PayPalInfo = @PayPalInfo WHERE UserID = @UserID";
-            return CoroNacessitiesDBContext.getConnection().Execute(query, new {UserID=user.userId, Password = user.password, Name=user.name , Surname = user.surname , Email = user.email , ContactNo = user.contactNo , Rating = user.rating , PayPalInfo = user.payPalInfo });
+            return CoroNacessitiesDBContext.getConnection().Execute(query, new {UserID=user.userId, Password = user.password, Name=user.name , Surname = user.surname , Email = user.email , ContactNo = user.contactNo , Rating = 0 , PayPalInfo = "" });
    
          }
         public int AddUser(RegisterModel user)
         {
-            string queryAddress = @"INSERT INTO [CoroNacessitiesDB].dbo.Address (ComplexName, UnitNumber, StreetName, StreetNumber, Suburb, CityID) VALUES (@ComplexName, @UnitNumber, @StreetName,@StreetNumber , @Suburb, @CityID) SELECT SCOPE_IDENTITY() ;";
-            int addressID = CoroNacessitiesDBContext.getConnection().ExecuteScalar<int>(queryAddress, new { ComplexName = user.complexName, UnitNumber = user.unitNumber, StreetName = user.streetName, StreetNumber = user.streetNumber, Suburb = user.suburb, CityID = user.cityID });
+            //string queryAddress = @"INSERT INTO [CoroNacessitiesDB].dbo.Address (ComplexName, UnitNumber, StreetName, StreetNumber, Suburb, CityID) VALUES (@ComplexName, @UnitNumber, @StreetName,@StreetNumber , @Suburb, @CityID) SELECT SCOPE_IDENTITY() ;";
+            //int addressID = CoroNacessitiesDBContext.getConnection().ExecuteScalar<int>(queryAddress, new { ComplexName = user.complexName, UnitNumber = user.unitNumber, StreetName = user.streetName, StreetNumber = user.streetNumber, Suburb = user.suburb, CityID = user.cityID });
 
-            string queryUser = @"INSERT INTO [CoroNacessitiesDB].dbo.Users (Username, Password, Name, Surname, Email, ContactNo , Rating ,AddressID) VALUES (@Username, @Password, @Name, @Surname, @Email, @ContactNo , @PayPalInfo , @AddressID)";
-            return CoroNacessitiesDBContext.getConnection().Execute(queryUser, new { Username = user.username , Password = user.password , Name = user.name , Surname = user.surname , Email=user.email , ContactNo= user.contactNo, AddressID = addressID });
+            string queryUser = @"INSERT INTO [CoroNacessitiesDB].dbo.Users (Username, Password, Name, Surname, Email, ContactNo , AddressID) VALUES (@Username, @Password, @Name, @Surname, @Email, @ContactNo , @AddressID)";
+            return CoroNacessitiesDBContext.getConnection().Execute(queryUser, new { Username = user.username , Password = user.password , Name = user.name , Surname = user.surname , Email=user.email , ContactNo= user.contactNo, AddressID = 1 });
         }
 
         public string GetUserPassword(string username)
