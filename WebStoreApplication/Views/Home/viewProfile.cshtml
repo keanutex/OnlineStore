@@ -62,7 +62,7 @@
             $.get("http://localhost:5000/user/id/" + id, function (data) {
                 document.getElementById("username").innerHTML = data.username;
                 document.getElementById("firstName").innerHTML = data.name;
-                username = data.name;
+                username = data.username;
                 document.getElementById("surname").innerHTML = data.surname;
                 document.getElementById("email").innerHTML = data.email;
                 document.getElementById("contactNo").innerHTML = data.contactNo;
