@@ -3,6 +3,7 @@
 @using Newtonsoft.Json;
 @using Newtonsoft.Json.Linq;
 @using WebStoreApplication.Global;
+@using WebStoreApplication.Shared;
 
 @{
     ViewData["Title"] = "ProductDetails";
@@ -11,43 +12,38 @@
 <h1>Product Details</h1>
 
 <h1 style="text-align: center;" id="productName">PRODUCT NAME</h1>
-<h1 style="text-align: center;"><img src="blobgoeshere" target="_blank" class="img-fluid" style="font-size: 1rem; text-align: left;"></h1>
-<p style="text-align: left;" id="price">
-    <b>
-        PRICE:
-    </b>
-</p>
-<br>
-<br>
 
-<p style="text-align: left;" id="description">
-    <b>
-        DESCRIPTION:
-    </b>
-</p>
-<br>
-<br>
-<p style="text-align: left;">
-    <b>
-        ETC:
-    </b>
-</p>
+<ul class="list-group">
+    <li class="list-group-item" id="price">First item</li>
+    <li class="list-group-item" id="description">Second item</li>
+    <li class="list-group-item" id="type">Third item</li>
+</ul>
+<br />
+<button type="button" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
 
-<button>ADD TO CART</button>
+<button type="button" class="btn btn-primary" onclick="viewUser()">View User</button>
     
-
-
 @section Scripts{
     <script>
         var id = localStorage.getItem("productSelected");
+
+        function addToCart(username) {
+            window.location.href = "http://localhost:5000/products/addToCart/" + id;
+        }
+        
         $(document).ready(function () {
             $.get("http://localhost:5000/products/" + id, function (data) {
                 document.getElementById("productName").innerHTML = data.productName;
                 document.getElementById("price").innerHTML = ("Price: " + data.price).bold();
                 document.getElementById("description").innerHTML = ("Description: " + data.productDescription).bold();
-
+                document.getElementById("type").innerHTML = ("Category: " + data.typeModel.typeName).bold();
+                localStorage.setItem("userSelected", data.userID);
             })
         });
+
+        function viewUser() {
+            window.location.href = "https://localhost:5001/Home/viewProfile";
+        }
 
     </script>
 }

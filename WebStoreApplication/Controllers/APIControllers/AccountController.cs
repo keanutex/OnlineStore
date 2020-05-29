@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
 
 namespace WebStoreApplication.Controllers
 {
@@ -16,47 +11,73 @@ namespace WebStoreApplication.Controllers
     {
         private readonly IAccessDBContext dbAccessor;
 
-        private readonly Common common;
-
+        private readonly Common common = new Common();
+        
         public AccountController(IAccessDBContext dbAccessor)
         {
             this.dbAccessor = dbAccessor;
         }
-
+      
         [HttpPost("login")]
-        public IActionResult Login(LoginModel login)
+        public IActionResult Login([FromForm] LoginModel login)
         {
-            
-            if(common.CreateHashPassword(login.password).Equals(dbAccessor.GetUserPassword(login.username), StringComparison.InvariantCultureIgnoreCase))
+            try
             {
-                return Ok();
+                if (common.CreateHashPassword(login.password).Equals(dbAccessor.GetUserPassword(login.username), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    UserModel user = dbAccessor.GetUserByUsername(login.username);
+                    Session.userId = user.userId;
+                    Session.username = login.username;
+                    return Redirect("https://localhost:5001/");
+                }
+                else
+                {
+                    return Redirect("https://localhost:5001/Home/Login");
+                }
             }
-            else{
-                return Unauthorized();
+            catch(Exception ex)
+            {
+                return Redirect("https://localhost:5001/Home/Login");
             }
+        }
 
+        [HttpGet("logout")]
+        public IActionResult Logout()
+        {
+            Session.userId = 0;
+            Session.username = null;
+            return Redirect("https://localhost:5001/");
         }
 
         [HttpPost("register")]
-        public IActionResult Register(RegisterModel newUser )
+        public IActionResult Register(RegisterModel newUser)
         {
-          
-            if (dbAccessor.GetUser(newUser.username).userId>0)
+            try
             {
-                return BadRequest("Username already exists");
-            }
-            newUser.password = common.CreateHashPassword(newUser.password);
-            if (dbAccessor.AddUser(newUser) == 1)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest();
-            }
+                UserModel user = dbAccessor.GetUserByUsername(newUser.username);
 
+                if (user == null)
+                {
+                    newUser.password = common.CreateHashPassword(newUser.password);
+                    if (dbAccessor.AddUser(newUser) == 1)
+                    {
+                        return Redirect("https://localhost:5001/Home/Login");
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return BadRequest("Username already exists");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
-
-        
     }
 }

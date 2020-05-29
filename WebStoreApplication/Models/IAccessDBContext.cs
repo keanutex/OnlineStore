@@ -3,21 +3,34 @@ namespace WebStoreApplication.Models
 {
     public interface IAccessDBContext
     {
+        // Products
         public int AddProduct(ProductModel product);
         public int RemoveProduct(int productID);
         public ProductModel GetProduct(int productID);
         public int UpdateProduct(int id, ProductModel product); 
         public List<ProductModel> GetAllProducts();
-        public UserModel GetUser(string username);
+        public List<ProductModel> GetAllUserProducts(int userID);
+        public List<TypeModel> GetAllProductTypes();
+
+        public int AddProductToCart(int userID, int orderStatusID, int productID, int noOfProducts);
+
+        public int EmptyCart(int userId);
+
+        //User Details
+        public UserModel GetUserByUsername(string username);
+        public UserModel GetUserById(int userId);
         public int UpdateUser(UserModel user);
         public string GetUserPassword(string username);
         public int AddUser(RegisterModel user);
         public int UpdateAddress(AddressModel address);
-        //public UserModel GetUser(int userID);
-        //public int UpdateUser(int userID ,UserModel user);
 
+        //Location Details
+        public LocationModel GetLocation(string username);
+        public List<CityModel> GetAllCities();
+        public AddressModel GetAddress(int addressID);
+      
         // Order Items
-        public int AddOrderItems(int orderItemID, OrderItemModel orderItem);
+        public int AddOrderItems(OrderItemModel orderItem);
         public int RemoveOrderItems(int orderItemID);
         public OrderItemModel GetOrderItems(int orderItemID);
         public int UpdateOrderItems(int orderItemID, OrderItemModel orderItem);
@@ -29,6 +42,7 @@ namespace WebStoreApplication.Models
         public OrdersModel GetOrder(int orderID);
         public int UpdateOrder(int orderID, OrdersModel order);
         public List<OrdersModel> GetAllOrdersForUser(int userID);
+        public List<ProductModel> GetAllProductsInOrder(int userID, string statusDescription);
 
 
         // Order Status

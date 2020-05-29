@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
 
 namespace WebStoreApplication.Controllers
 {
@@ -19,17 +20,6 @@ namespace WebStoreApplication.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-       
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         public IActionResult Products()
         {
             return View();
@@ -37,12 +27,14 @@ namespace WebStoreApplication.Controllers
 
         public IActionResult Register()
         {
-            return View();
+            RegisterModel registerModel = new RegisterModel();
+            return View(registerModel);
         }
 
         public IActionResult Login()
         {
-            return View();
+            LoginModel loginModel = new LoginModel();
+            return View(loginModel);
         }
 
         public IActionResult Logout()
@@ -62,6 +54,30 @@ namespace WebStoreApplication.Controllers
 
         public IActionResult ProductDetails()
         {
+            return View();
+        }
+
+        public IActionResult Admin()
+        {
+            if(Session.username != "Keanu")
+                return View("Products");
+            return View();
+        }
+
+        public IActionResult Cart()
+        {
+            if (Session.username == null) {
+                return View("Login");
+            }
+            return View();
+        }
+
+        public IActionResult AddProduct()
+        {
+            if (Session.username == null)
+            {
+                return View("Login");
+            }
             return View();
         }
 

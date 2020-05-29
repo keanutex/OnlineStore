@@ -1,0 +1,53 @@
+@using Newtonsoft.Json
+@using WebStoreApplication.Global
+
+@{
+    ViewData["Title"] = "Cart";
+
+    String result = Global.Get("http://localhost:5000/orders/all");
+    List<ProductModel> products = JsonConvert.DeserializeObject<List<ProductModel>>(result);
+    decimal total = 0;
+    foreach (var product in products)
+        total += product.price;
+}
+
+<h1>Your Cart</h1>
+
+<table class="table" id="productsTable">
+    <thead>
+        <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (ProductModel product in products)
+            {
+                <tr>
+                    <td>@product.productName</td>
+                    <td>@product.productDescription</td>
+                    <td>R @product.price</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<h3>Total Amount</h3>
+<h4>@total</h4>
+<hr/>
+<a class="btn btn-primary" onclick="emptyCart()" href="@Url.Action("create-payment", "payments", new {total=total})">Check out</a>
+
+@section Scripts{ 
+<script>function emptyCart() {
+    var settings = {
+        "url": "https://localhost:5001/products/emptyCart",
+        "method": "POST",
+        "timeout": 0
+    };
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+    }</script>
+}

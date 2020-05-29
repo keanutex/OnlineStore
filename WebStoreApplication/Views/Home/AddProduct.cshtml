@@ -1,0 +1,105 @@
+﻿@using WebStoreApplication.Global;
+@using Newtonsoft.Json;
+@using WebStoreApplication.Shared;
+@{
+    ViewData["Title"] = "AddProduct";
+
+
+    int userId = Session.userId;
+
+    String result = Global.Get("http://localhost:5000/products/all/product-types");
+    List<TypeModel> types = JsonConvert.DeserializeObject<List<TypeModel>>(result);
+}
+
+<h1>Add Product</h1>
+<br>
+<form>
+    <div class="row">
+        <div class="col">
+            <label for="productName">Product Name</label>
+            <input type="text" class="form-control" id="productName" placeholder="e.g. Hand Sanitizer">
+        </div>
+        <div class="col">
+            <label for="productDescription">Product Description</label>
+            <input type="text" class="form-control" id="productDescription" placeholder="e.g. Cleans hands. 99% effective">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <label for="productPrice">Product Price (R)</label>
+            <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="20" id="productPrice">
+        </div>
+        <div class="col">
+            <label for="productType">Product Category</label>
+                <select class="browser-default custom-select" id="productType" onchange="updateType()">
+                    <option value="0">Select a category</option>
+                    @{
+                        foreach (TypeModel type in types)
+                        {
+                                        <option value="@type.typeID">
+                                            @type.typeName
+                                        </option>
+
+                        }
+                    }
+                    </select>
+</div>
+        </div>
+
+</form>
+<br>
+<button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button>
+
+@section Scripts{
+    <script type="text/javascript">
+        var productIdG = "0";
+ 
+        function addProduct() {
+            var productName = document.getElementById("productName").value;
+            var productDescription = document.getElementById("productDescription").value;
+            var productPrice = document.getElementById("productPrice").value;
+            var userId = @userId;
+            var statusId;
+
+            if (productName === "" || !productPrice || productType === "" || productType === "0") {
+                alert("FORM IS INVALID");
+            } else if(!userId){
+                alert("You are not logged in.");
+            }else {
+                var data = 
+                    {
+                        productName: productName,
+                        productDescription: productDescription,
+                        price: parseInt(productPrice),
+                        typeID: parseInt(productIdG),
+                        productName: productName,
+                        userID: userId,
+                        productStatusID : 1,
+                        productImage: ""
+                }
+                var settings = {
+                    "url": "https://localhost:5001/products/",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify(data),
+                };
+
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                });
+                window.location.href = "https://localhost:5001";
+            }
+
+            
+        }
+
+        function updateType() {
+            productIdG = document.getElementById("productType").value;
+        }
+
+    </script>
+}

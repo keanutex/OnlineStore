@@ -1,20 +1,26 @@
-﻿
+﻿@model WebStoreApplication.Models.LoginModel
+
 @{
     ViewData["Title"] = "Login";
 }
 
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="C:\Users\liebenbergd03\Downloads\style.css" />
-</head>
-<body class="form" id="login">
-    <h1>Login</h1>
-    <div>
-        <form class="login-form">
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
-            <button id="LoginButton">login</button>
-        </form>
+<h1>Login</h1>
+<hr />
+<form action="https://localhost:5001/user/login" method="post">
+    
+    <div class="form-group">
+        <label for="username">User Name</label>
+        <input type="text" class="form-control" id="username" name="username">
     </div>
-</body>
-
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password">
+    </div>
+    @* <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div> *@
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");">Cancel</button>
+</form>
+<p>Don't have an account? <a class="" asp-area="" asp-controller="Home" asp-action="Register">Register here!</a></p>

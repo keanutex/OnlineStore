@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStoreApplication.Models;
+using WebStoreApplication.Shared;
+using System.Collections.Generic;
 
 namespace WebStoreApplication.Controllers.APIControllers
 {
@@ -33,12 +35,13 @@ namespace WebStoreApplication.Controllers.APIControllers
             return Ok(dbAccessor.GetOrder(orderID));
         }
 
-        [HttpGet("{userID}")]
-        public IActionResult GetAllOrdersForUser(int userID)
+        [HttpGet("all/")]
+        public IActionResult GetAllOrderedItems()
         {
-            return Ok(dbAccessor.GetAllOrdersForUser(userID));
+            int userID = Session.userId;
+            string statusDescription = "Accepted";
+            return Ok(dbAccessor.GetAllProductsInOrder(userID, statusDescription));
         }
-
 
         [HttpDelete("{orderID}")]
         public IActionResult RemoveOrder(int orderID)

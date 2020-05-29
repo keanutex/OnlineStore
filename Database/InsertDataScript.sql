@@ -102,7 +102,7 @@ INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (1, 1, 2)
 GO
 INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (2, 1, 2)
 GO
-INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (3, 2, 4)
+INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (3, 2, 3)
 GO
 INSERT [dbo].[Orders] ([OrderID], [UserID], [OrderStatusID]) VALUES (4, 3, 5)
 GO
@@ -121,6 +121,8 @@ GO
 INSERT [dbo].[OrderItem] ([OrderItemID], [OrderID], [ProductID], [NoOfProducts]) VALUES (3, 2, 4, 2)
 GO
 INSERT [dbo].[OrderItem] ([OrderItemID], [OrderID], [ProductID], [NoOfProducts]) VALUES (4, 3, 5, 6)
+GO
+INSERT [dbo].[OrderItem] ([OrderItemID], [OrderID], [ProductID], [NoOfProducts]) VALUES (5, 3, 2, 3)
 GO
 SET IDENTITY_INSERT [dbo].[OrderItem] OFF
 GO
@@ -147,17 +149,17 @@ print 'OrderStatus table inserts done'
 
 SET IDENTITY_INSERT [dbo].[Users] ON
 GO
-INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID],[Password]) VALUES (1, N'Dirco', N'Dirco', N'Liebenberg', N'Dirco@Liebenberg.co.za',N'0123456789', N'5', N'Image1', 1, N'abcd123')
+INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[AddressID],[Password]) VALUES (1, N'Dirco', N'Dirco', N'Liebenberg', N'Dirco@Liebenberg.co.za',N'0123456789', 1, N'd03oFC8TbZLFiIhlnUJ5+1W8aLfWql9fyvmBm1Ye+7k=')
 GO
-INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID],[Password]) VALUES (2, N'Dylan', N'Dylan', N'Carstens', N'Dylan@Cartstens.co.za', N'1234567890', N'5', N'Image2', 2, N'efgh45')
+INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[AddressID],[Password]) VALUES (2, N'Dylan', N'Dylan', N'Carstens', N'Dylan@Cartstens.co.za', N'1234567890', 2, N'd03oFC8TbZLFiIhlnUJ5+1W8aLfWql9fyvmBm1Ye+7k=')
 GO
-INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID],[Password]) VALUES (3, N'Hannelie', N'Hannelie', N'Van Rensburg', N'Hannelie@jvr.co.za', N'2345678901', N'5', N'Image3', 3, N'72ijkl')
+INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[AddressID],[Password]) VALUES (3, N'Hannelie', N'Hannelie', N'Van Rensburg', N'Hannelie@jvr.co.za', N'2345678901', 3, N'd03oFC8TbZLFiIhlnUJ5+1W8aLfWql9fyvmBm1Ye+7k=')
 GO
-INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID],[Password]) VALUES (4, N'Keanu', N'Keanu', N'Teixera', N'Keanu@Teixera.co.za', N'3456789012', N'5', N'Image4', 4, N'mn18op')
+INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[AddressID],[Password]) VALUES (4, N'Keanu', N'Keanu', N'Teixera', N'Keanu@Teixera.co.za', N'3456789012', 4, N'd03oFC8TbZLFiIhlnUJ5+1W8aLfWql9fyvmBm1Ye+7k=')
 GO
-INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID],[Password]) VALUES (5, N'Ronaldo', N'Ronaldo', N'Ronaldo', N'Ronaldo@Ronaldo.co.za', N'4567890123', N'5', N'Image5', 5, N'q90rst')
+INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[AddressID],[Password]) VALUES (5, N'Ronaldo', N'Ronaldo', N'Ronaldo', N'Ronaldo@Ronaldo.co.za', N'4567890123', 5, N'd03oFC8TbZLFiIhlnUJ5+1W8aLfWql9fyvmBm1Ye+7k=')
 GO
-INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[Rating],[PayPalInfo],[AddressID],[Password]) VALUES (6, N'Vignesh', N'Vignesh', N'Iyer', N'Vignesh@Iyer.co.za', N'5678901234', N'5', N'Image6', 6, N'uvw789x')
+INSERT [dbo].[Users] ([UserID],[Username],[Name],[Surname],[Email],[ContactNo],[AddressID],[Password]) VALUES (6, N'Vignesh', N'Vignesh', N'Iyer', N'Vignesh@Iyer.co.za', N'5678901234', 6, N'd03oFC8TbZLFiIhlnUJ5+1W8aLfWql9fyvmBm1Ye+7k=')
 GO
 SET IDENTITY_INSERT [dbo].[Users] OFF
 GO
