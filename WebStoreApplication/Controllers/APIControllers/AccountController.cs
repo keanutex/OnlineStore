@@ -50,7 +50,7 @@ namespace WebStoreApplication.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(RegisterModel newUser )
+        public IActionResult Register(RegisterModel newUser)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace WebStoreApplication.Controllers
                     newUser.password = common.CreateHashPassword(newUser.password);
                     if (dbAccessor.AddUser(newUser) == 1)
                     {
-                        return Ok();
+                        return Redirect("https://localhost:5001/Home/Login");
                     }
                     else
                     {

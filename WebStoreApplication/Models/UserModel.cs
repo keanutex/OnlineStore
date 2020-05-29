@@ -12,8 +12,6 @@ namespace WebStoreApplication.Models
         public string surname { get; set; }
         public string email { get; set; }
         public string contactNo { get; set; }
-        public int rating { get ; set; } 
-        public string payPalInfo { get; set; }
         public int addressId { get; set; }
 
         public UserModel()
