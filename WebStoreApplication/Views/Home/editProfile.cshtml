@@ -106,7 +106,7 @@
 
                     var id = @userId;
                     $.get("http://localhost:5000/user/id/" + id, function (data) {
-                        username = data.name;
+                        username = data.username;
                         $.get("http://localhost:5000/location/" + username, function (data) {
                             lat = data.latitude;
                             long = data.longitude;
